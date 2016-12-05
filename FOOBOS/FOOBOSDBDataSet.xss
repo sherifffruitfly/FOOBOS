@@ -14,7 +14,7 @@
     <Shape ID="DesignTable:OrderLine" ZOrder="25" X="795" Y="28" Height="267" Width="202" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="216" />
     <Shape ID="DesignTable:OrderLog" ZOrder="1" X="1106" Y="22" Height="362" Width="199" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="294" />
     <Shape ID="DesignTable:Product" ZOrder="10" X="1999" Y="-2" Height="248" Width="190" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="197" />
-    <Shape ID="DesignTable:ProductCategory" ZOrder="13" X="2232" Y="535" Height="305" Width="243" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
+    <Shape ID="DesignTable:ProductCategory" ZOrder="13" X="2232" Y="514" Height="343" Width="243" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="292" />
     <Shape ID="DesignTable:ProductLocation" ZOrder="12" X="1672" Y="298" Height="210" Width="240" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="159" />
     <Shape ID="DesignTable:ProductLocationLog" ZOrder="9" X="1651" Y="7" Height="191" Width="262" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
     <Shape ID="DesignTable:Sale" ZOrder="6" X="1675" Y="643" Height="153" Width="168" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
@@ -93,7 +93,7 @@
       <RoutePoints>
         <Point>
           <X>2346</X>
-          <Y>535</Y>
+          <Y>514</Y>
         </Point>
         <Point>
           <X>2346</X>
@@ -317,7 +317,7 @@
         </Point>
         <Point>
           <X>2249</X>
-          <Y>535</Y>
+          <Y>514</Y>
         </Point>
       </RoutePoints>
     </Connector>
