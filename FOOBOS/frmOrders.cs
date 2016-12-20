@@ -185,10 +185,14 @@ namespace FOOBOS
 
         private void tvOrders_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+            this.currNode = e.Node;
+            tvOrders.SelectedNode = this.currNode;
+            this.LoadOrderTab();
+            this.LoadOrderlineTab();
+
             if (e.Button == MouseButtons.Right)
             {
-                this.currNode = e.Node;
-                tvOrders.SelectedNode = this.currNode;
+                
                 this.parNode = e.Node.Parent;
                 // check which node i'm on 
                 // display appropriate context menu
@@ -205,6 +209,16 @@ namespace FOOBOS
                     tvContextOrderline.Show(MousePosition);
                 }
             }
+        }
+
+        private void LoadOrderTab()
+        {
+
+        }
+
+        private void LoadOrderlineTab()
+        {
+
         }
 
     }
