@@ -11,9 +11,21 @@ namespace FOOBOS
     {
         #region Members
 
-        private bool loggedIn = false;
-        private string currentUser = string.Empty;
+        private FOOBOSDBEntities db = null;
+        private Contact currentUser = null;
         private string formFriendlyName = string.Empty;
+        private Screen currentScreen = null;
+
+        public FOOBOSDBEntities DB
+        {
+            get { return db; }
+            set { db = value; }
+        }
+        public Screen CurrentScreen
+        {
+            get { return currentScreen; }
+            set { currentScreen = value; }
+        }
 
         public string FormFriendlyName
         {
@@ -21,13 +33,7 @@ namespace FOOBOS
             set { formFriendlyName = value; }
         }
 
-        public bool LoggedIn
-        {
-            get { return loggedIn; }
-            set { loggedIn = value; }
-        }
-
-        public string CurrentUser
+        public Contact CurrentUser
         {
             get { return currentUser; }
             set { currentUser = value; }
@@ -40,38 +46,52 @@ namespace FOOBOS
         public FOOBOSBaseForm() : base()
         {
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
+            this.SetScreen();
             
         }
 
-        public FOOBOSBaseForm(bool li, string un) : base()
+        public FOOBOSBaseForm(Contact cu) : base()
         {
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
-            loggedIn = li;
-            currentUser = un;
+            currentUser = cu;
+            this.SetScreen();
         }
 
         #endregion
 
         #region Methods
 
+        public void SetScreen()
+        {
+            Screen[] screens = Screen.AllScreens;
+            //this.CurrentScreen = Screen.FromControl(this);
+        }
+
+        public void UpdateTitle()
+        {
+            this.Text = this.FormFriendlyName + (this.CurrentUser == null ? " - (not logged in)" : " - " + this.CurrentUser.UN);
+        }
+
         public bool LogOut()
         {
             bool ret = false;
 
+            // enter logout time in userlog table
+            // set currentuser to null
 
             ret = true;
             MessageBox.Show("Successfully logged out.");
             return ret;
         }
 
-        public bool LogOut(string un)
+        public bool LogOut(Contact un)
         {
             bool ret = false;
 
             // mark db user log that currentuser logged out
 
             ret = true;
-            MessageBox.Show("Successfully logged out " + CurrentUser);
+            MessageBox.Show("Successfully logged out " + CurrentUser.UN);
             return ret;
         }
 
@@ -81,7 +101,7 @@ namespace FOOBOS
 
         private void OnProcessExit(object sender, EventArgs e)
         {
-            if (this.CurrentUser == string.Empty)
+            if (this.CurrentUser == null)
             {
                 this.LogOut();
             }

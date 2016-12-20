@@ -1,0 +1,1636 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FOOBOSDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Calendar">
+          <Key>
+            <PropertyRef Name="DateKey" />
+          </Key>
+          <Property Name="DateKey" Type="datetime" Nullable="false" />
+          <Property Name="DateInt" Type="int" />
+          <Property Name="YearKey" Type="int" />
+          <Property Name="HalfYearKey" Type="int" />
+          <Property Name="QuarterKey" Type="int" />
+          <Property Name="MonthKey" Type="int" />
+          <Property Name="MonthOfYear" Type="int" />
+          <Property Name="MonthOfHalfYear" Type="int" />
+          <Property Name="MonthOfQuarter" Type="int" />
+          <Property Name="QuarterOfYear" Type="int" />
+          <Property Name="QuarterOfHalfYear" Type="int" />
+          <Property Name="HalfYearOfYear" Type="int" />
+          <Property Name="DayOfYear" Type="int" />
+          <Property Name="DayOfHalfYear" Type="int" />
+          <Property Name="DayOfQuarter" Type="int" />
+          <Property Name="DayOfMonth" Type="int" />
+          <Property Name="DayOfWeekMon" Type="int" />
+          <Property Name="DayOfWeekSun" Type="int" />
+          <Property Name="WeekOfYearISO" Type="int" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="50" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="ValidFrom" Type="datetime" />
+          <Property Name="ValidTo" Type="datetime" />
+          <Property Name="UN" Type="nvarchar" MaxLength="100" />
+          <Property Name="PW" Type="nvarchar" MaxLength="100" />
+          <Property Name="Admin" Type="int" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="int" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="County" Type="nvarchar" MaxLength="50" />
+          <Property Name="Neighborhood" Type="nvarchar" MaxLength="50" />
+          <Property Name="Aux1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Aux2" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="ParentLocationID" Type="int" />
+          <Property Name="ValidFrom" Type="datetime" />
+          <Property Name="ValidTo" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderNum" Type="nvarchar" MaxLength="10" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="ExpectedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="OrderLine">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="ProductCategoryID" Type="int" />
+          <Property Name="Qty" Type="float" />
+          <Property Name="ReceivedDate" Type="datetime" />
+          <Property Name="ProductLocationID" Type="int" />
+          <Property Name="LineNum" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="UnitPrice" Type="float" />
+        </EntityType>
+        <EntityType Name="OrderLog">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="ExpectedDate" Type="datetime" />
+          <Property Name="OrderlineID" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="ProductCategoryID" Type="int" />
+          <Property Name="Qty" Type="float" />
+          <Property Name="LineNum" Type="int" />
+          <Property Name="UnitPrice" Type="float" />
+          <Property Name="ReceivedDate" Type="datetime" />
+          <Property Name="ChangeType" Type="nvarchar" MaxLength="1" />
+          <Property Name="ChangeTime" Type="datetime" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="ProductCategoryID" Type="int" />
+          <Property Name="UOMID" Type="int" />
+          <Property Name="AvgValue" Type="float" />
+          <Property Name="WarningQty" Type="float" />
+          <Property Name="ValidFrom" Type="datetime" />
+          <Property Name="ValidTo" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="ParentCategoryID" Type="int" />
+          <Property Name="ValidFrom" Type="datetime" />
+          <Property Name="ValidTo" Type="datetime" />
+          <Property Name="InheritValidity" Type="int" />
+          <Property Name="UOMID" Type="int" />
+          <Property Name="InheritUOM" Type="int" />
+          <Property Name="AvgValue" Type="float" />
+          <Property Name="InheritAvgValue" Type="int" />
+          <Property Name="WarningQty" Type="float" />
+          <Property Name="InheritWarningQty" Type="int" />
+          <Property Name="Perishable" Type="int" />
+          <Property Name="InheritPerishable" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductLocation">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="ProductCategoryID" Type="int" />
+          <Property Name="LocationID" Type="int" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="float" />
+          <Property Name="AvgValue" Type="float" />
+        </EntityType>
+        <EntityType Name="ProductLocationLog">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductLocationID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="ProductCategoryID" Type="int" />
+          <Property Name="LocationID" Type="int" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" />
+          <Property Name="Qty" Type="float" />
+          <Property Name="AvgValue" Type="float" />
+          <Property Name="ChangeType" Type="nvarchar" MaxLength="1" />
+          <Property Name="ChangeTime" Type="datetime" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="SaleDate" Type="datetime" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SaleLine">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SaleID" Type="int" />
+          <Property Name="ProductLocationID" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="LineNum" Type="int" />
+          <Property Name="DeliveryDate" Type="datetime" />
+          <Property Name="Qty" Type="float" />
+          <Property Name="UnitPrice" Type="float" />
+        </EntityType>
+        <EntityType Name="SaleLog">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SaleID" Type="int" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="SaleDate" Type="datetime" />
+          <Property Name="SaleLineID" Type="int" />
+          <Property Name="SaleLineSaleID" Type="int" />
+          <Property Name="ProductLocationID" Type="int" />
+          <Property Name="DeliveryDate" Type="datetime" />
+          <Property Name="Qty" Type="float" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="ChangeType" Type="nvarchar" MaxLength="1" />
+          <Property Name="ChangeTime" Type="datetime" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Supplier" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="ContactID" Type="int" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="ValidFrom" Type="datetime" />
+          <Property Name="ValidTo" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UOM">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="BaseID" Type="int" />
+          <Property Name="ConversionFactor" Type="float" />
+          <Property Name="Abbrev" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserLog">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContactID" Type="int" />
+          <Property Name="LoginTime" Type="datetime" />
+          <Property Name="LogoutTime" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Location_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Location1" Type="Self.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="Location1">
+              <PropertyRef Name="ParentLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLine_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="OrderLine" Type="Self.OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="OrderLine">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLine_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="OrderLine" Type="Self.OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="OrderLine">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLine_ProductCategory">
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="0..1" />
+          <End Role="OrderLine" Type="Self.OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="OrderLine">
+              <PropertyRef Name="ProductCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLine_ProductLocation">
+          <End Role="ProductLocation" Type="Self.ProductLocation" Multiplicity="0..1" />
+          <End Role="OrderLine" Type="Self.OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductLocation">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="OrderLine">
+              <PropertyRef Name="ProductLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLog_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="OrderLog" Type="Self.OrderLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="OrderLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductCategory">
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="ProductCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_UOM">
+          <End Role="UOM" Type="Self.UOM" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="UOMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductCategory_ProductCategory">
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="0..1" />
+          <End Role="ProductCategory1" Type="Self.ProductCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="ProductCategory1">
+              <PropertyRef Name="ParentCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductCategory_UOM">
+          <End Role="UOM" Type="Self.UOM" Multiplicity="0..1" />
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="ProductCategory">
+              <PropertyRef Name="UOMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductLocation_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="ProductLocation" Type="Self.ProductLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="ProductLocation">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductLocation_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ProductLocation" Type="Self.ProductLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="ProductLocation">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductLocation_ProductCategory">
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="0..1" />
+          <End Role="ProductLocation" Type="Self.ProductLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="ProductLocation">
+              <PropertyRef Name="ProductCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductLocationLog_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="ProductLocationLog" Type="Self.ProductLocationLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="ProductLocationLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SaleLine_ProductLocation">
+          <End Role="ProductLocation" Type="Self.ProductLocation" Multiplicity="0..1" />
+          <End Role="SaleLine" Type="Self.SaleLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductLocation">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="SaleLine">
+              <PropertyRef Name="ProductLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SaleLine_Sale">
+          <End Role="Sale" Type="Self.Sale" Multiplicity="0..1" />
+          <End Role="SaleLine" Type="Self.SaleLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="SaleLine">
+              <PropertyRef Name="SaleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SaleLog_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="SaleLog" Type="Self.SaleLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="SaleLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supplier_Contact1">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="Supplier">
+              <PropertyRef Name="ContactID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UOM_UOM">
+          <End Role="UOM" Type="Self.UOM" Multiplicity="0..1" />
+          <End Role="UOM1" Type="Self.UOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="UOM1">
+              <PropertyRef Name="BaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLog_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="UserLog" Type="Self.UserLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="UserLog">
+              <PropertyRef Name="ContactID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FOOBOSDBModelStoreContainer">
+          <EntitySet Name="Calendar" EntityType="Self.Calendar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderLine" EntityType="Self.OrderLine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderLog" EntityType="Self.OrderLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductLocation" EntityType="Self.ProductLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductLocationLog" EntityType="Self.ProductLocationLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SaleLine" EntityType="Self.SaleLine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SaleLog" EntityType="Self.SaleLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLog" EntityType="Self.UserLog" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Location_Location" Association="Self.FK_Location_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Location1" EntitySet="Location" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Supplier" Association="Self.FK_Order_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLine_Order" Association="Self.FK_OrderLine_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderLine" EntitySet="OrderLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLine_Product" Association="Self.FK_OrderLine_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderLine" EntitySet="OrderLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLine_ProductCategory" Association="Self.FK_OrderLine_ProductCategory">
+            <End Role="ProductCategory" EntitySet="ProductCategory" />
+            <End Role="OrderLine" EntitySet="OrderLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLine_ProductLocation" Association="Self.FK_OrderLine_ProductLocation">
+            <End Role="ProductLocation" EntitySet="ProductLocation" />
+            <End Role="OrderLine" EntitySet="OrderLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLog_Contact" Association="Self.FK_OrderLog_Contact">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="OrderLog" EntitySet="OrderLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductCategory" Association="Self.FK_Product_ProductCategory">
+            <End Role="ProductCategory" EntitySet="ProductCategory" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_UOM" Association="Self.FK_Product_UOM">
+            <End Role="UOM" EntitySet="UOM" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCategory_ProductCategory" Association="Self.FK_ProductCategory_ProductCategory">
+            <End Role="ProductCategory" EntitySet="ProductCategory" />
+            <End Role="ProductCategory1" EntitySet="ProductCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCategory_UOM" Association="Self.FK_ProductCategory_UOM">
+            <End Role="UOM" EntitySet="UOM" />
+            <End Role="ProductCategory" EntitySet="ProductCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductLocation_Location" Association="Self.FK_ProductLocation_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="ProductLocation" EntitySet="ProductLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductLocation_Product" Association="Self.FK_ProductLocation_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductLocation" EntitySet="ProductLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductLocation_ProductCategory" Association="Self.FK_ProductLocation_ProductCategory">
+            <End Role="ProductCategory" EntitySet="ProductCategory" />
+            <End Role="ProductLocation" EntitySet="ProductLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductLocationLog_Contact" Association="Self.FK_ProductLocationLog_Contact">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="ProductLocationLog" EntitySet="ProductLocationLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Customer" Association="Self.FK_Sale_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SaleLine_ProductLocation" Association="Self.FK_SaleLine_ProductLocation">
+            <End Role="ProductLocation" EntitySet="ProductLocation" />
+            <End Role="SaleLine" EntitySet="SaleLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SaleLine_Sale" Association="Self.FK_SaleLine_Sale">
+            <End Role="Sale" EntitySet="Sale" />
+            <End Role="SaleLine" EntitySet="SaleLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SaleLog_Contact" Association="Self.FK_SaleLog_Contact">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="SaleLog" EntitySet="SaleLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supplier_Contact1" Association="Self.FK_Supplier_Contact1">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="Supplier" EntitySet="Supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UOM_UOM" Association="Self.FK_UOM_UOM">
+            <End Role="UOM" EntitySet="UOM" />
+            <End Role="UOM1" EntitySet="UOM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLog_Contact" Association="Self.FK_UserLog_Contact">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="UserLog" EntitySet="UserLog" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FOOBOSDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Calendar">
+          <Key>
+            <PropertyRef Name="DateKey" />
+          </Key>
+          <Property Name="DateKey" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateInt" Type="Int32" />
+          <Property Name="YearKey" Type="Int32" />
+          <Property Name="HalfYearKey" Type="Int32" />
+          <Property Name="QuarterKey" Type="Int32" />
+          <Property Name="MonthKey" Type="Int32" />
+          <Property Name="MonthOfYear" Type="Int32" />
+          <Property Name="MonthOfHalfYear" Type="Int32" />
+          <Property Name="MonthOfQuarter" Type="Int32" />
+          <Property Name="QuarterOfYear" Type="Int32" />
+          <Property Name="QuarterOfHalfYear" Type="Int32" />
+          <Property Name="HalfYearOfYear" Type="Int32" />
+          <Property Name="DayOfYear" Type="Int32" />
+          <Property Name="DayOfHalfYear" Type="Int32" />
+          <Property Name="DayOfQuarter" Type="Int32" />
+          <Property Name="DayOfMonth" Type="Int32" />
+          <Property Name="DayOfWeekMon" Type="Int32" />
+          <Property Name="DayOfWeekSun" Type="Int32" />
+          <Property Name="WeekOfYearISO" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="ValidFrom" Type="DateTime" Precision="3" />
+          <Property Name="ValidTo" Type="DateTime" Precision="3" />
+          <Property Name="UN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PW" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Admin" Type="Int32" />
+          <NavigationProperty Name="ProductLocationLogs" Relationship="Self.FK_ProductLocationLog_Contact" FromRole="Contact" ToRole="ProductLocationLog" />
+          <NavigationProperty Name="SaleLogs" Relationship="Self.FK_SaleLog_Contact" FromRole="Contact" ToRole="SaleLog" />
+          <NavigationProperty Name="Suppliers" Relationship="Self.FK_Supplier_Contact1" FromRole="Contact" ToRole="Supplier" />
+          <NavigationProperty Name="UserLogs" Relationship="Self.FK_UserLog_Contact" FromRole="Contact" ToRole="UserLog" />
+          <NavigationProperty Name="OrderLogs" Relationship="FOOBOSDBModel.FK_OrderLog_Contact" FromRole="Contact" ToRole="OrderLog" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="County" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Neighborhood" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Aux1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Aux2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK_Sale_Customer" FromRole="Customer" ToRole="Sale" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ParentLocationID" Type="Int32" />
+          <Property Name="ValidFrom" Type="DateTime" Precision="3" />
+          <Property Name="ValidTo" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Location1" Relationship="Self.FK_Location_Location" FromRole="Location" ToRole="Location1" />
+          <NavigationProperty Name="Location2" Relationship="Self.FK_Location_Location" FromRole="Location1" ToRole="Location" />
+          <NavigationProperty Name="ProductLocations" Relationship="Self.FK_ProductLocation_Location" FromRole="Location" ToRole="ProductLocation" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_Order_Supplier" FromRole="Order" ToRole="Supplier" />
+          <NavigationProperty Name="OrderLines" Relationship="Self.FK_OrderLine_Order" FromRole="Order" ToRole="OrderLine" />
+          <Property Name="ExpectedDate" Type="DateTime" Precision="3" />
+          <Property Name="OrderNum" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OrderLine">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="ProductCategoryID" Type="Int32" />
+          <Property Name="Qty" Type="Double" />
+          <Property Name="ReceivedDate" Type="DateTime" Precision="3" />
+          <Property Name="ProductLocationID" Type="Int32" />
+          <Property Name="LineNum" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UnitPrice" Type="Double" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrderLine_Order" FromRole="OrderLine" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_OrderLine_Product" FromRole="OrderLine" ToRole="Product" />
+          <NavigationProperty Name="ProductCategory" Relationship="Self.FK_OrderLine_ProductCategory" FromRole="OrderLine" ToRole="ProductCategory" />
+          <NavigationProperty Name="ProductLocation" Relationship="Self.FK_OrderLine_ProductLocation" FromRole="OrderLine" ToRole="ProductLocation" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProductCategoryID" Type="Int32" />
+          <Property Name="UOMID" Type="Int32" />
+          <Property Name="AvgValue" Type="Double" />
+          <Property Name="WarningQty" Type="Double" />
+          <Property Name="ValidFrom" Type="DateTime" Precision="3" />
+          <Property Name="ValidTo" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="OrderLines" Relationship="Self.FK_OrderLine_Product" FromRole="Product" ToRole="OrderLine" />
+          <NavigationProperty Name="ProductCategory" Relationship="Self.FK_Product_ProductCategory" FromRole="Product" ToRole="ProductCategory" />
+          <NavigationProperty Name="UOM" Relationship="Self.FK_Product_UOM" FromRole="Product" ToRole="UOM" />
+          <NavigationProperty Name="ProductLocations" Relationship="Self.FK_ProductLocation_Product" FromRole="Product" ToRole="ProductLocation" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ParentCategoryID" Type="Int32" />
+          <Property Name="ValidFrom" Type="DateTime" Precision="3" />
+          <Property Name="ValidTo" Type="DateTime" Precision="3" />
+          <Property Name="InheritValidity" Type="Int32" />
+          <Property Name="UOMID" Type="Int32" />
+          <Property Name="InheritUOM" Type="Int32" />
+          <Property Name="AvgValue" Type="Double" />
+          <Property Name="InheritAvgValue" Type="Int32" />
+          <Property Name="WarningQty" Type="Double" />
+          <Property Name="InheritWarningQty" Type="Int32" />
+          <NavigationProperty Name="OrderLines" Relationship="Self.FK_OrderLine_ProductCategory" FromRole="ProductCategory" ToRole="OrderLine" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Product_ProductCategory" FromRole="ProductCategory" ToRole="Product" />
+          <NavigationProperty Name="ProductCategory1" Relationship="Self.FK_ProductCategory_ProductCategory" FromRole="ProductCategory" ToRole="ProductCategory1" />
+          <NavigationProperty Name="ProductCategory2" Relationship="Self.FK_ProductCategory_ProductCategory" FromRole="ProductCategory1" ToRole="ProductCategory" />
+          <NavigationProperty Name="UOM" Relationship="Self.FK_ProductCategory_UOM" FromRole="ProductCategory" ToRole="UOM" />
+          <NavigationProperty Name="ProductLocations" Relationship="Self.FK_ProductLocation_ProductCategory" FromRole="ProductCategory" ToRole="ProductLocation" />
+          <Property Name="Perishable" Type="Int32" />
+          <Property Name="InheritPerishable" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ProductLocation">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="ProductCategoryID" Type="Int32" />
+          <Property Name="LocationID" Type="Int32" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Double" />
+          <Property Name="AvgValue" Type="Double" />
+          <NavigationProperty Name="Location1" Relationship="Self.FK_ProductLocation_Location" FromRole="ProductLocation" ToRole="Location" />
+          <NavigationProperty Name="OrderLines" Relationship="Self.FK_OrderLine_ProductLocation" FromRole="ProductLocation" ToRole="OrderLine" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductLocation_Product" FromRole="ProductLocation" ToRole="Product" />
+          <NavigationProperty Name="ProductCategory" Relationship="Self.FK_ProductLocation_ProductCategory" FromRole="ProductLocation" ToRole="ProductCategory" />
+          <NavigationProperty Name="SaleLines" Relationship="Self.FK_SaleLine_ProductLocation" FromRole="ProductLocation" ToRole="SaleLine" />
+        </EntityType>
+        <EntityType Name="ProductLocationLog">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductLocationID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="ProductCategoryID" Type="Int32" />
+          <Property Name="LocationID" Type="Int32" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Double" />
+          <Property Name="AvgValue" Type="Double" />
+          <Property Name="ChangeType" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="ChangeTime" Type="DateTime" Precision="3" />
+          <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="Contact" Relationship="Self.FK_ProductLocationLog_Contact" FromRole="ProductLocationLog" ToRole="Contact" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="SaleDate" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Sale_Customer" FromRole="Sale" ToRole="Customer" />
+          <NavigationProperty Name="SaleLines" Relationship="Self.FK_SaleLine_Sale" FromRole="Sale" ToRole="SaleLine" />
+        </EntityType>
+        <EntityType Name="SaleLine">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SaleID" Type="Int32" />
+          <Property Name="ProductLocationID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LineNum" Type="Int32" />
+          <Property Name="DeliveryDate" Type="DateTime" Precision="3" />
+          <Property Name="Qty" Type="Double" />
+          <Property Name="UnitPrice" Type="Double" />
+          <NavigationProperty Name="ProductLocation" Relationship="Self.FK_SaleLine_ProductLocation" FromRole="SaleLine" ToRole="ProductLocation" />
+          <NavigationProperty Name="Sale" Relationship="Self.FK_SaleLine_Sale" FromRole="SaleLine" ToRole="Sale" />
+        </EntityType>
+        <EntityType Name="SaleLog">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SaleID" Type="Int32" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="SaleDate" Type="DateTime" Precision="3" />
+          <Property Name="SaleLineID" Type="Int32" />
+          <Property Name="SaleLineSaleID" Type="Int32" />
+          <Property Name="ProductLocationID" Type="Int32" />
+          <Property Name="DeliveryDate" Type="DateTime" Precision="3" />
+          <Property Name="Qty" Type="Double" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ChangeType" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="ChangeTime" Type="DateTime" Precision="3" />
+          <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="Contact" Relationship="Self.FK_SaleLog_Contact" FromRole="SaleLog" ToRole="Contact" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Supplier1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ContactID" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ValidFrom" Type="DateTime" Precision="3" />
+          <Property Name="ValidTo" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Contact" Relationship="Self.FK_Supplier_Contact1" FromRole="Supplier" ToRole="Contact" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Supplier" FromRole="Supplier" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UOM">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BaseID" Type="Int32" />
+          <Property Name="ConversionFactor" Type="Double" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Product_UOM" FromRole="UOM" ToRole="Product" />
+          <NavigationProperty Name="ProductCategories" Relationship="Self.FK_ProductCategory_UOM" FromRole="UOM" ToRole="ProductCategory" />
+          <NavigationProperty Name="UOM1" Relationship="Self.FK_UOM_UOM" FromRole="UOM" ToRole="UOM1" />
+          <NavigationProperty Name="UOM2" Relationship="Self.FK_UOM_UOM" FromRole="UOM1" ToRole="UOM" />
+          <Property Name="Abbrev" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserLog">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactID" Type="Int32" />
+          <Property Name="LoginTime" Type="DateTime" Precision="3" />
+          <Property Name="LogoutTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Contact" Relationship="Self.FK_UserLog_Contact" FromRole="UserLog" ToRole="Contact" />
+        </EntityType>
+        <Association Name="FK_ProductLocationLog_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="ProductLocationLog" Type="Self.ProductLocationLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="ProductLocationLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SaleLog_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="SaleLog" Type="Self.SaleLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="SaleLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supplier_Contact1">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="Supplier">
+              <PropertyRef Name="ContactID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLog_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="UserLog" Type="Self.UserLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="UserLog">
+              <PropertyRef Name="ContactID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Location1" Type="Self.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="Location1">
+              <PropertyRef Name="ParentLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductLocation_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="ProductLocation" Type="Self.ProductLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="ProductLocation">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLine_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="OrderLine" Type="Self.OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="OrderLine">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLine_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="OrderLine" Type="Self.OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="OrderLine">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLine_ProductCategory">
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="0..1" />
+          <End Role="OrderLine" Type="Self.OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="OrderLine">
+              <PropertyRef Name="ProductCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLine_ProductLocation">
+          <End Role="ProductLocation" Type="Self.ProductLocation" Multiplicity="0..1" />
+          <End Role="OrderLine" Type="Self.OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductLocation">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="OrderLine">
+              <PropertyRef Name="ProductLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductCategory">
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="ProductCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_UOM">
+          <End Role="UOM" Type="Self.UOM" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="UOMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductLocation_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ProductLocation" Type="Self.ProductLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="ProductLocation">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductCategory_ProductCategory">
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="0..1" />
+          <End Role="ProductCategory1" Type="Self.ProductCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="ProductCategory1">
+              <PropertyRef Name="ParentCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductCategory_UOM">
+          <End Role="UOM" Type="Self.UOM" Multiplicity="0..1" />
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="ProductCategory">
+              <PropertyRef Name="UOMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductLocation_ProductCategory">
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="0..1" />
+          <End Role="ProductLocation" Type="Self.ProductLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="ProductLocation">
+              <PropertyRef Name="ProductCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SaleLine_ProductLocation">
+          <End Role="ProductLocation" Type="Self.ProductLocation" Multiplicity="0..1" />
+          <End Role="SaleLine" Type="Self.SaleLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductLocation">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="SaleLine">
+              <PropertyRef Name="ProductLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SaleLine_Sale">
+          <End Role="Sale" Type="Self.Sale" Multiplicity="0..1" />
+          <End Role="SaleLine" Type="Self.SaleLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="SaleLine">
+              <PropertyRef Name="SaleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UOM_UOM">
+          <End Role="UOM" Type="Self.UOM" Multiplicity="0..1" />
+          <End Role="UOM1" Type="Self.UOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="UOM1">
+              <PropertyRef Name="BaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FOOBOSDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Calendars" EntityType="Self.Calendar" />
+          <EntitySet Name="Contacts" EntityType="Self.Contact" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="OrderLines" EntityType="Self.OrderLine" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
+          <EntitySet Name="ProductLocations" EntityType="Self.ProductLocation" />
+          <EntitySet Name="ProductLocationLogs" EntityType="Self.ProductLocationLog" />
+          <EntitySet Name="Sales" EntityType="Self.Sale" />
+          <EntitySet Name="SaleLines" EntityType="Self.SaleLine" />
+          <EntitySet Name="SaleLogs" EntityType="Self.SaleLog" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="UOMs" EntityType="Self.UOM" />
+          <EntitySet Name="UserLogs" EntityType="Self.UserLog" />
+          <AssociationSet Name="FK_ProductLocationLog_Contact" Association="Self.FK_ProductLocationLog_Contact">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="ProductLocationLog" EntitySet="ProductLocationLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SaleLog_Contact" Association="Self.FK_SaleLog_Contact">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="SaleLog" EntitySet="SaleLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supplier_Contact1" Association="Self.FK_Supplier_Contact1">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="Supplier" EntitySet="Suppliers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLog_Contact" Association="Self.FK_UserLog_Contact">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="UserLog" EntitySet="UserLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Customer" Association="Self.FK_Sale_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_Location" Association="Self.FK_Location_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Location1" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductLocation_Location" Association="Self.FK_ProductLocation_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="ProductLocation" EntitySet="ProductLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Supplier" Association="Self.FK_Order_Supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLine_Order" Association="Self.FK_OrderLine_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderLine" EntitySet="OrderLines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLine_Product" Association="Self.FK_OrderLine_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderLine" EntitySet="OrderLines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLine_ProductCategory" Association="Self.FK_OrderLine_ProductCategory">
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+            <End Role="OrderLine" EntitySet="OrderLines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLine_ProductLocation" Association="Self.FK_OrderLine_ProductLocation">
+            <End Role="ProductLocation" EntitySet="ProductLocations" />
+            <End Role="OrderLine" EntitySet="OrderLines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductCategory" Association="Self.FK_Product_ProductCategory">
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_UOM" Association="Self.FK_Product_UOM">
+            <End Role="UOM" EntitySet="UOMs" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductLocation_Product" Association="Self.FK_ProductLocation_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductLocation" EntitySet="ProductLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCategory_ProductCategory" Association="Self.FK_ProductCategory_ProductCategory">
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+            <End Role="ProductCategory1" EntitySet="ProductCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCategory_UOM" Association="Self.FK_ProductCategory_UOM">
+            <End Role="UOM" EntitySet="UOMs" />
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductLocation_ProductCategory" Association="Self.FK_ProductLocation_ProductCategory">
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+            <End Role="ProductLocation" EntitySet="ProductLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SaleLine_ProductLocation" Association="Self.FK_SaleLine_ProductLocation">
+            <End Role="ProductLocation" EntitySet="ProductLocations" />
+            <End Role="SaleLine" EntitySet="SaleLines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SaleLine_Sale" Association="Self.FK_SaleLine_Sale">
+            <End Role="Sale" EntitySet="Sales" />
+            <End Role="SaleLine" EntitySet="SaleLines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UOM_UOM" Association="Self.FK_UOM_UOM">
+            <End Role="UOM" EntitySet="UOMs" />
+            <End Role="UOM1" EntitySet="UOMs" />
+          </AssociationSet>
+          <EntitySet Name="OrderLogs" EntityType="FOOBOSDBModel.OrderLog" />
+          <AssociationSet Name="FK_OrderLog_Contact" Association="FOOBOSDBModel.FK_OrderLog_Contact">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="OrderLog" EntitySet="OrderLogs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="OrderLog">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="ExpectedDate" Type="DateTime" Precision="3" />
+          <Property Name="OrderlineID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="ProductCategoryID" Type="Int32" />
+          <Property Name="Qty" Type="Double" />
+          <Property Name="LineNum" Type="Int32" />
+          <Property Name="UnitPrice" Type="Double" />
+          <Property Name="ReceivedDate" Type="DateTime" Precision="3" />
+          <Property Name="ChangeType" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="ChangeTime" Type="DateTime" Precision="3" />
+          <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="Contact" Relationship="FOOBOSDBModel.FK_OrderLog_Contact" FromRole="OrderLog" ToRole="Contact" />
+        </EntityType>
+        <Association Name="FK_OrderLog_Contact">
+          <End Type="FOOBOSDBModel.Contact" Role="Contact" Multiplicity="0..1" />
+          <End Type="FOOBOSDBModel.OrderLog" Role="OrderLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="OrderLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FOOBOSDBModelStoreContainer" CdmEntityContainer="FOOBOSDBEntities">
+          <EntitySetMapping Name="Calendars">
+            <EntityTypeMapping TypeName="FOOBOSDBModel.Calendar">
+              <MappingFragment StoreEntitySet="Calendar">
+                <ScalarProperty Name="DateKey" ColumnName="DateKey" />
+                <ScalarProperty Name="DateInt" ColumnName="DateInt" />
+                <ScalarProperty Name="YearKey" ColumnName="YearKey" />
+                <ScalarProperty Name="HalfYearKey" ColumnName="HalfYearKey" />
+                <ScalarProperty Name="QuarterKey" ColumnName="QuarterKey" />
+                <ScalarProperty Name="MonthKey" ColumnName="MonthKey" />
+                <ScalarProperty Name="MonthOfYear" ColumnName="MonthOfYear" />
+                <ScalarProperty Name="MonthOfHalfYear" ColumnName="MonthOfHalfYear" />
+                <ScalarProperty Name="MonthOfQuarter" ColumnName="MonthOfQuarter" />
+                <ScalarProperty Name="QuarterOfYear" ColumnName="QuarterOfYear" />
+                <ScalarProperty Name="QuarterOfHalfYear" ColumnName="QuarterOfHalfYear" />
+                <ScalarProperty Name="HalfYearOfYear" ColumnName="HalfYearOfYear" />
+                <ScalarProperty Name="DayOfYear" ColumnName="DayOfYear" />
+                <ScalarProperty Name="DayOfHalfYear" ColumnName="DayOfHalfYear" />
+                <ScalarProperty Name="DayOfQuarter" ColumnName="DayOfQuarter" />
+                <ScalarProperty Name="DayOfMonth" ColumnName="DayOfMonth" />
+                <ScalarProperty Name="DayOfWeekMon" ColumnName="DayOfWeekMon" />
+                <ScalarProperty Name="DayOfWeekSun" ColumnName="DayOfWeekSun" />
+                <ScalarProperty Name="WeekOfYearISO" ColumnName="WeekOfYearISO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="FOOBOSDBModel.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+                <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
+                <ScalarProperty Name="UN" ColumnName="UN" />
+                <ScalarProperty Name="PW" ColumnName="PW" />
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="FOOBOSDBModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="Neighborhood" ColumnName="Neighborhood" />
+                <ScalarProperty Name="Aux1" ColumnName="Aux1" />
+                <ScalarProperty Name="Aux2" ColumnName="Aux2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="FOOBOSDBModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParentLocationID" ColumnName="ParentLocationID" />
+                <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+                <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="FOOBOSDBModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+                <ScalarProperty Name="ExpectedDate" ColumnName="ExpectedDate" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderLines">
+            <EntityTypeMapping TypeName="FOOBOSDBModel.OrderLine">
+              <MappingFragment StoreEntitySet="OrderLine">
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+                <ScalarProperty Name="ProductLocationID" ColumnName="ProductLocationID" />
+                <ScalarProperty Name="LineNum" ColumnName="LineNum" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="FOOBOSDBModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
+                <ScalarProperty Name="UOMID" ColumnName="UOMID" />
+                <ScalarProperty Name="AvgValue" ColumnName="AvgValue" />
+                <ScalarProperty Name="WarningQty" ColumnName="WarningQty" />
+                <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+                <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCategories">
+            <EntityTypeMapping TypeName="FOOBOSDBModel.ProductCategory">
+              <MappingFragment StoreEntitySet="ProductCategory">
+                <ScalarProperty Name="InheritPerishable" ColumnName="InheritPerishable" />
+                <ScalarProperty Name="Perishable" ColumnName="Perishable" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ParentCategoryID" ColumnName="ParentCategoryID" />
+                <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+                <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
+                <ScalarProperty Name="InheritValidity" ColumnName="InheritValidity" />
+                <ScalarProperty Name="UOMID" ColumnName="UOMID" />
+                <ScalarProperty Name="InheritUOM" ColumnName="InheritUOM" />
+                <ScalarProperty Name="AvgValue" ColumnName="AvgValue" />
+                <ScalarProperty Name="InheritAvgValue" ColumnName="InheritAvgValue" />
+                <ScalarProperty Name="WarningQty" ColumnName="WarningQty" />
+                <ScalarProperty Name="InheritWarningQty" ColumnName="InheritWarningQty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductLocations">
+            <EntityTypeMapping TypeName="FOOBOSDBModel.ProductLocation">
+              <MappingFragment StoreEntitySet="ProductLocation">
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="AvgValue" ColumnName="AvgValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductLocationLogs">
+            <EntityTypeMapping TypeName="FOOBOSDBModel.ProductLocationLog">
+              <MappingFragment StoreEntitySet="ProductLocationLog">
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+                <ScalarProperty Name="ProductLocationID" ColumnName="ProductLocationID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="AvgValue" ColumnName="AvgValue" />
+                <ScalarProperty Name="ChangeType" ColumnName="ChangeType" />
+                <ScalarProperty Name="ChangeTime" ColumnName="ChangeTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="FOOBOSDBModel.Sale">
+              <MappingFragment StoreEntitySet="Sale">
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SaleLines">
+            <EntityTypeMapping TypeName="FOOBOSDBModel.SaleLine">
+              <MappingFragment StoreEntitySet="SaleLine">
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+                <ScalarProperty Name="SaleID" ColumnName="SaleID" />
+                <ScalarProperty Name="ProductLocationID" ColumnName="ProductLocationID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LineNum" ColumnName="LineNum" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SaleLogs">
+            <EntityTypeMapping TypeName="FOOBOSDBModel.SaleLog">
+              <MappingFragment StoreEntitySet="SaleLog">
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+                <ScalarProperty Name="SaleID" ColumnName="SaleID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+                <ScalarProperty Name="SaleLineID" ColumnName="SaleLineID" />
+                <ScalarProperty Name="SaleLineSaleID" ColumnName="SaleLineSaleID" />
+                <ScalarProperty Name="ProductLocationID" ColumnName="ProductLocationID" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ChangeType" ColumnName="ChangeType" />
+                <ScalarProperty Name="ChangeTime" ColumnName="ChangeTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="FOOBOSDBModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+                <ScalarProperty Name="Supplier1" ColumnName="Supplier" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+                <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FOOBOSDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UOMs">
+            <EntityTypeMapping TypeName="FOOBOSDBModel.UOM">
+              <MappingFragment StoreEntitySet="UOM">
+                <ScalarProperty Name="Abbrev" ColumnName="Abbrev" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BaseID" ColumnName="BaseID" />
+                <ScalarProperty Name="ConversionFactor" ColumnName="ConversionFactor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLogs">
+            <EntityTypeMapping TypeName="FOOBOSDBModel.UserLog">
+              <MappingFragment StoreEntitySet="UserLog">
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+                <ScalarProperty Name="LogoutTime" ColumnName="LogoutTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderLogs">
+            <EntityTypeMapping TypeName="FOOBOSDBModel.OrderLog">
+              <MappingFragment StoreEntitySet="OrderLog">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ChangeTime" ColumnName="ChangeTime" />
+                <ScalarProperty Name="ChangeType" ColumnName="ChangeType" />
+                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="LineNum" ColumnName="LineNum" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="OrderlineID" ColumnName="OrderlineID" />
+                <ScalarProperty Name="ExpectedDate" ColumnName="ExpectedDate" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ad80819bb48d4aab9793053254867ed3" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="FOOBOSDBModel.Calendar" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FOOBOSDBModel.Contact" Width="1.5" PointX="0.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FOOBOSDBModel.Customer" Width="1.5" PointX="8.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FOOBOSDBModel.Location" Width="1.5" PointX="8.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FOOBOSDBModel.Order" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FOOBOSDBModel.OrderLine" Width="1.5" PointX="7.5" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="FOOBOSDBModel.Product" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="FOOBOSDBModel.ProductCategory" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="FOOBOSDBModel.ProductLocation" Width="1.5" PointX="10.5" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FOOBOSDBModel.ProductLocationLog" Width="1.5" PointX="3" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FOOBOSDBModel.Sale" Width="1.5" PointX="10.5" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FOOBOSDBModel.SaleLine" Width="1.5" PointX="12.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FOOBOSDBModel.SaleLog" Width="1.5" PointX="3" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FOOBOSDBModel.Supplier" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FOOBOSDBModel.sysdiagram" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FOOBOSDBModel.UOM" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FOOBOSDBModel.UserLog" Width="1.5" PointX="3" PointY="28.75" IsExpanded="true" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_ProductLocationLog_Contact" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_SaleLog_Contact" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_Supplier_Contact1" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_UserLog_Contact" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_Sale_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_Location_Location" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_ProductLocation_Location" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_Order_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_OrderLine_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_OrderLine_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_OrderLine_ProductCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_OrderLine_ProductLocation" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_Product_ProductCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_Product_UOM" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_ProductLocation_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_ProductCategory_ProductCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_ProductCategory_UOM" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_ProductLocation_ProductCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_SaleLine_ProductLocation" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_SaleLine_Sale" ManuallyRouted="false" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_UOM_UOM" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FOOBOSDBModel.OrderLog" Width="1.5" PointX="4.125" PointY="15.625" />
+        <AssociationConnector Association="FOOBOSDBModel.FK_OrderLog_Contact" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

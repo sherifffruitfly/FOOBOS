@@ -33,8 +33,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +57,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calendar.cs">
+      <DependentUpon>FOOBOSEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contact.cs">
+      <DependentUpon>FOOBOSEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Customer.cs">
+      <DependentUpon>FOOBOSEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="FOOBOSBaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -53,6 +73,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FOOBOSDBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="FOOBOSEntityModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FOOBOSEntityModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FOOBOSEntityModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FOOBOSEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FOOBOSEntityModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FOOBOSEntityModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
@@ -66,14 +101,67 @@
     <Compile Include="frmMainMenu.Designer.cs">
       <DependentUpon>frmMainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOrders.Designer.cs">
+      <DependentUpon>frmOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Location.cs">
+      <DependentUpon>FOOBOSEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Order.cs">
+      <DependentUpon>FOOBOSEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderLine.cs">
+      <DependentUpon>FOOBOSEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderLog.cs">
+      <DependentUpon>FOOBOSEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product.cs">
+      <DependentUpon>FOOBOSEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductCategory.cs">
+      <DependentUpon>FOOBOSEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductLocation.cs">
+      <DependentUpon>FOOBOSEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductLocationLog.cs">
+      <DependentUpon>FOOBOSEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="Sale.cs">
+      <DependentUpon>FOOBOSEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SaleLine.cs">
+      <DependentUpon>FOOBOSEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SaleLog.cs">
+      <DependentUpon>FOOBOSEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier.cs">
+      <DependentUpon>FOOBOSEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>FOOBOSEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UOM.cs">
+      <DependentUpon>FOOBOSEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserLog.cs">
+      <DependentUpon>FOOBOSEntityModel.tt</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainMenu.resx">
       <DependentUpon>frmMainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOrders.resx">
+      <DependentUpon>frmOrders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -95,6 +183,14 @@
     <None Include="FOOBOSDBDataSet.xss">
       <DependentUpon>FOOBOSDBDataSet.xsd</DependentUpon>
     </None>
+    <EntityDeploy Include="FOOBOSEntityModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FOOBOSEntityModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="FOOBOSEntityModel.edmx.diagram">
+      <DependentUpon>FOOBOSEntityModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -109,7 +205,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FOOBOSEntityModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FOOBOSEntityModel.edmx</DependentUpon>
+      <LastGenOutput>FOOBOSEntityModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="FOOBOSEntityModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FOOBOSEntityModel.edmx</DependentUpon>
+      <LastGenOutput>FOOBOSEntityModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="FOOBOSInitialDataPopulation.txt" />
     <Content Include="FOOBOSMainIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

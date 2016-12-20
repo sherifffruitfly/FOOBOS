@@ -1550,6 +1550,8 @@ namespace FOOBOS {
             
             private global::System.Data.DataColumn columnZip;
             
+            private global::System.Data.DataColumn columnAdmin;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ContactDataTable() {
@@ -1697,6 +1699,14 @@ namespace FOOBOS {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AdminColumn {
+                get {
+                    return this.columnAdmin;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1732,7 +1742,7 @@ namespace FOOBOS {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ContactRow AddContactRow(string Name, string Phone, string Email, int SupplierID, System.DateTime ValidFrom, System.DateTime ValidTo, string UN, string PW, string Description, string Address, string City, string State, string Zip) {
+            public ContactRow AddContactRow(string Name, string Phone, string Email, int SupplierID, System.DateTime ValidFrom, System.DateTime ValidTo, string UN, string PW, string Description, string Address, string City, string State, string Zip, int Admin) {
                 ContactRow rowContactRow = ((ContactRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1748,7 +1758,8 @@ namespace FOOBOS {
                         Address,
                         City,
                         State,
-                        Zip};
+                        Zip,
+                        Admin};
                 rowContactRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowContactRow);
                 return rowContactRow;
@@ -1792,6 +1803,7 @@ namespace FOOBOS {
                 this.columnCity = base.Columns["City"];
                 this.columnState = base.Columns["State"];
                 this.columnZip = base.Columns["Zip"];
+                this.columnAdmin = base.Columns["Admin"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1825,6 +1837,8 @@ namespace FOOBOS {
                 base.Columns.Add(this.columnState);
                 this.columnZip = new global::System.Data.DataColumn("Zip", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnZip);
+                this.columnAdmin = new global::System.Data.DataColumn("Admin", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAdmin);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnpkid}, true));
                 this.columnpkid.AutoIncrement = true;
@@ -2668,6 +2682,8 @@ namespace FOOBOS {
             
             private global::System.Data.DataColumn columnDescription;
             
+            private global::System.Data.DataColumn columnExpectedDate;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public OrderDataTable() {
@@ -2735,6 +2751,14 @@ namespace FOOBOS {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ExpectedDateColumn {
+                get {
+                    return this.columnExpectedDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2770,13 +2794,14 @@ namespace FOOBOS {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public OrderRow AddOrderRow(SupplierRow parentSupplierRowByFK_Order_Supplier, System.DateTime OrderDate, string Description) {
+            public OrderRow AddOrderRow(SupplierRow parentSupplierRowByFK_Order_Supplier, System.DateTime OrderDate, string Description, System.DateTime ExpectedDate) {
                 OrderRow rowOrderRow = ((OrderRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
                         OrderDate,
-                        Description};
+                        Description,
+                        ExpectedDate};
                 if ((parentSupplierRowByFK_Order_Supplier != null)) {
                     columnValuesArray[1] = parentSupplierRowByFK_Order_Supplier[0];
                 }
@@ -2813,6 +2838,7 @@ namespace FOOBOS {
                 this.columnSupplierID = base.Columns["SupplierID"];
                 this.columnOrderDate = base.Columns["OrderDate"];
                 this.columnDescription = base.Columns["Description"];
+                this.columnExpectedDate = base.Columns["ExpectedDate"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2826,6 +2852,8 @@ namespace FOOBOS {
                 base.Columns.Add(this.columnOrderDate);
                 this.columnDescription = new global::System.Data.DataColumn("Description", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDescription);
+                this.columnExpectedDate = new global::System.Data.DataColumn("ExpectedDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnExpectedDate);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnpkid}, true));
                 this.columnpkid.AutoIncrement = true;
@@ -4222,6 +4250,10 @@ namespace FOOBOS {
             
             private global::System.Data.DataColumn columnInheritWarningQty;
             
+            private global::System.Data.DataColumn columnPerishable;
+            
+            private global::System.Data.DataColumn columnInheritPerishable;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ProductCategoryDataTable() {
@@ -4361,6 +4393,22 @@ namespace FOOBOS {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PerishableColumn {
+                get {
+                    return this.columnPerishable;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn InheritPerishableColumn {
+                get {
+                    return this.columnInheritPerishable;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -4396,7 +4444,7 @@ namespace FOOBOS {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ProductCategoryRow AddProductCategoryRow(string Name, ProductCategoryRow parentProductCategoryRowByFK_ProductCategory_ProductCategory, System.DateTime ValidFrom, System.DateTime ValidTo, string Description, int InheritValidity, UOMRow parentUOMRowByFK_ProductCategory_UOM, int InheritUOM, double AvgValue, int InheritAvgValue, double WarningQty, int InheritWarningQty) {
+            public ProductCategoryRow AddProductCategoryRow(string Name, ProductCategoryRow parentProductCategoryRowByFK_ProductCategory_ProductCategory, System.DateTime ValidFrom, System.DateTime ValidTo, string Description, int InheritValidity, UOMRow parentUOMRowByFK_ProductCategory_UOM, int InheritUOM, double AvgValue, int InheritAvgValue, double WarningQty, int InheritWarningQty, int Perishable, int InheritPerishable) {
                 ProductCategoryRow rowProductCategoryRow = ((ProductCategoryRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -4411,7 +4459,9 @@ namespace FOOBOS {
                         AvgValue,
                         InheritAvgValue,
                         WarningQty,
-                        InheritWarningQty};
+                        InheritWarningQty,
+                        Perishable,
+                        InheritPerishable};
                 if ((parentProductCategoryRowByFK_ProductCategory_ProductCategory != null)) {
                     columnValuesArray[2] = parentProductCategoryRowByFK_ProductCategory_ProductCategory[0];
                 }
@@ -4460,6 +4510,8 @@ namespace FOOBOS {
                 this.columnInheritAvgValue = base.Columns["InheritAvgValue"];
                 this.columnWarningQty = base.Columns["WarningQty"];
                 this.columnInheritWarningQty = base.Columns["InheritWarningQty"];
+                this.columnPerishable = base.Columns["Perishable"];
+                this.columnInheritPerishable = base.Columns["InheritPerishable"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4491,6 +4543,10 @@ namespace FOOBOS {
                 base.Columns.Add(this.columnWarningQty);
                 this.columnInheritWarningQty = new global::System.Data.DataColumn("InheritWarningQty", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnInheritWarningQty);
+                this.columnPerishable = new global::System.Data.DataColumn("Perishable", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPerishable);
+                this.columnInheritPerishable = new global::System.Data.DataColumn("InheritPerishable", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInheritPerishable);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnpkid}, true));
                 this.columnpkid.AutoIncrement = true;
@@ -8315,6 +8371,22 @@ namespace FOOBOS {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int Admin {
+                get {
+                    try {
+                        return ((int)(this[this.tableContact.AdminColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Admin\' in table \'Contact\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableContact.AdminColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNameNull() {
                 return this.IsNull(this.tableContact.NameColumn);
             }
@@ -8467,6 +8539,18 @@ namespace FOOBOS {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetZipNull() {
                 this[this.tableContact.ZipColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsAdminNull() {
+                return this.IsNull(this.tableContact.AdminColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetAdminNull() {
+                this[this.tableContact.AdminColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9004,6 +9088,22 @@ namespace FOOBOS {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime ExpectedDate {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableOrder.ExpectedDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ExpectedDate\' in table \'Order\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableOrder.ExpectedDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public SupplierRow SupplierRow {
                 get {
                     return ((SupplierRow)(this.GetParentRow(this.Table.ParentRelations["FK_Order_Supplier"])));
@@ -9047,6 +9147,18 @@ namespace FOOBOS {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDescriptionNull() {
                 this[this.tableOrder.DescriptionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsExpectedDateNull() {
+                return this.IsNull(this.tableOrder.ExpectedDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetExpectedDateNull() {
+                this[this.tableOrder.ExpectedDateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10297,6 +10409,38 @@ namespace FOOBOS {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int Perishable {
+                get {
+                    try {
+                        return ((int)(this[this.tableProductCategory.PerishableColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Perishable\' in table \'ProductCategory\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableProductCategory.PerishableColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int InheritPerishable {
+                get {
+                    try {
+                        return ((int)(this[this.tableProductCategory.InheritPerishableColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'InheritPerishable\' in table \'ProductCategory\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableProductCategory.InheritPerishableColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ProductCategoryRow ProductCategoryRowParent {
                 get {
                     return ((ProductCategoryRow)(this.GetParentRow(this.Table.ParentRelations["FK_ProductCategory_ProductCategory"])));
@@ -10459,6 +10603,30 @@ namespace FOOBOS {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetInheritWarningQtyNull() {
                 this[this.tableProductCategory.InheritWarningQtyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPerishableNull() {
+                return this.IsNull(this.tableProductCategory.PerishableColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPerishableNull() {
+                this[this.tableProductCategory.PerishableColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsInheritPerishableNull() {
+                return this.IsNull(this.tableProductCategory.InheritPerishableColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetInheritPerishableNull() {
+                this[this.tableProductCategory.InheritPerishableColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -14272,10 +14440,11 @@ SELECT DateKey, DateInt, YearKey, HalfYearKey, QuarterKey, MonthKey, MonthOfYear
             tableMapping.ColumnMappings.Add("City", "City");
             tableMapping.ColumnMappings.Add("State", "State");
             tableMapping.ColumnMappings.Add("Zip", "Zip");
+            tableMapping.ColumnMappings.Add("Admin", "Admin");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Contact] WHERE (([pkid] = @Original_pkid) AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@IsNull_Phone = 1 AND [Phone] IS NULL) OR ([Phone] = @Original_Phone)) AND ((@IsNull_Email = 1 AND [Email] IS NULL) OR ([Email] = @Original_Email)) AND ((@IsNull_SupplierID = 1 AND [SupplierID] IS NULL) OR ([SupplierID] = @Original_SupplierID)) AND ((@IsNull_ValidFrom = 1 AND [ValidFrom] IS NULL) OR ([ValidFrom] = @Original_ValidFrom)) AND ((@IsNull_ValidTo = 1 AND [ValidTo] IS NULL) OR ([ValidTo] = @Original_ValidTo)) AND ((@IsNull_UN = 1 AND [UN] IS NULL) OR ([UN] = @Original_UN)) AND ((@IsNull_PW = 1 AND [PW] IS NULL) OR ([PW] = @Original_PW)) AND ((@IsNull_Address = 1 AND [Address] IS NULL) OR ([Address] = @Original_Address)) AND ((@IsNull_City = 1 AND [City] IS NULL) OR ([City] = @Original_City)) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)) AND ((@IsNull_State = 1 AND [State] IS NULL) OR ([State] = @Original_State)) AND ((@IsNull_Zip = 1 AND [Zip] IS NULL) OR ([Zip] = @Original_Zip)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Contact] WHERE (([pkid] = @Original_pkid) AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@IsNull_Phone = 1 AND [Phone] IS NULL) OR ([Phone] = @Original_Phone)) AND ((@IsNull_Email = 1 AND [Email] IS NULL) OR ([Email] = @Original_Email)) AND ((@IsNull_SupplierID = 1 AND [SupplierID] IS NULL) OR ([SupplierID] = @Original_SupplierID)) AND ((@IsNull_ValidFrom = 1 AND [ValidFrom] IS NULL) OR ([ValidFrom] = @Original_ValidFrom)) AND ((@IsNull_ValidTo = 1 AND [ValidTo] IS NULL) OR ([ValidTo] = @Original_ValidTo)) AND ((@IsNull_UN = 1 AND [UN] IS NULL) OR ([UN] = @Original_UN)) AND ((@IsNull_PW = 1 AND [PW] IS NULL) OR ([PW] = @Original_PW)) AND ((@IsNull_Address = 1 AND [Address] IS NULL) OR ([Address] = @Original_Address)) AND ((@IsNull_City = 1 AND [City] IS NULL) OR ([City] = @Original_City)) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)) AND ((@IsNull_State = 1 AND [State] IS NULL) OR ([State] = @Original_State)) AND ((@IsNull_Zip = 1 AND [Zip] IS NULL) OR ([Zip] = @Original_Zip)) AND ((@IsNull_Admin = 1 AND [Admin] IS NULL) OR ([Admin] = @Original_Admin)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_pkid", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pkid", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Name", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -14304,10 +14473,12 @@ SELECT DateKey, DateInt, YearKey, HalfYearKey, QuarterKey, MonthKey, MonthOfYear
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_State", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "State", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Zip", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Zip", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Zip", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Zip", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Admin", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Admin", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Admin", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Admin", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Contact] ([Name], [Phone], [Email], [SupplierID], [ValidFrom], [ValidTo], [UN], [PW], [Address], [City], [Description], [State], [Zip]) VALUES (@Name, @Phone, @Email, @SupplierID, @ValidFrom, @ValidTo, @UN, @PW, @Address, @City, @Description, @State, @Zip);
-SELECT pkid, Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address, City, Description, State, Zip FROM Contact WHERE (pkid = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Contact] ([Name], [Phone], [Email], [SupplierID], [ValidFrom], [ValidTo], [UN], [PW], [Address], [City], [Description], [State], [Zip], [Admin]) VALUES (@Name, @Phone, @Email, @SupplierID, @ValidFrom, @ValidTo, @UN, @PW, @Address, @City, @Description, @State, @Zip, @Admin);
+SELECT pkid, Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address, City, Description, State, Zip, Admin FROM Contact WHERE (pkid = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Phone", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Phone", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -14322,10 +14493,29 @@ SELECT pkid, Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@State", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "State", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Zip", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Zip", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Admin", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Admin", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [Contact] SET [Name] = @Name, [Phone] = @Phone, [Email] = @Email, [SupplierID] = @SupplierID, [ValidFrom] = @ValidFrom, [ValidTo] = @ValidTo, [UN] = @UN, [PW] = @PW, [Address] = @Address, [City] = @City, [Description] = @Description, [State] = @State, [Zip] = @Zip WHERE (([pkid] = @Original_pkid) AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@IsNull_Phone = 1 AND [Phone] IS NULL) OR ([Phone] = @Original_Phone)) AND ((@IsNull_Email = 1 AND [Email] IS NULL) OR ([Email] = @Original_Email)) AND ((@IsNull_SupplierID = 1 AND [SupplierID] IS NULL) OR ([SupplierID] = @Original_SupplierID)) AND ((@IsNull_ValidFrom = 1 AND [ValidFrom] IS NULL) OR ([ValidFrom] = @Original_ValidFrom)) AND ((@IsNull_ValidTo = 1 AND [ValidTo] IS NULL) OR ([ValidTo] = @Original_ValidTo)) AND ((@IsNull_UN = 1 AND [UN] IS NULL) OR ([UN] = @Original_UN)) AND ((@IsNull_PW = 1 AND [PW] IS NULL) OR ([PW] = @Original_PW)) AND ((@IsNull_Address = 1 AND [Address] IS NULL) OR ([Address] = @Original_Address)) AND ((@IsNull_City = 1 AND [City] IS NULL) OR ([City] = @Original_City)) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)) AND ((@IsNull_State = 1 AND [State] IS NULL) OR ([State] = @Original_State)) AND ((@IsNull_Zip = 1 AND [Zip] IS NULL) OR ([Zip] = @Original_Zip)));
-SELECT pkid, Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address, City, Description, State, Zip FROM Contact WHERE (pkid = @pkid)";
+            this._adapter.UpdateCommand.CommandText = "UPDATE [Contact] SET [Name] = @Name, [Phone] = @Phone, [Email] = @Email, [Supplie" +
+                "rID] = @SupplierID, [ValidFrom] = @ValidFrom, [ValidTo] = @ValidTo, [UN] = @UN, " +
+                "[PW] = @PW, [Address] = @Address, [City] = @City, [Description] = @Description, " +
+                "[State] = @State, [Zip] = @Zip, [Admin] = @Admin WHERE (([pkid] = @Original_pkid" +
+                ") AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND (" +
+                "(@IsNull_Phone = 1 AND [Phone] IS NULL) OR ([Phone] = @Original_Phone)) AND ((@I" +
+                "sNull_Email = 1 AND [Email] IS NULL) OR ([Email] = @Original_Email)) AND ((@IsNu" +
+                "ll_SupplierID = 1 AND [SupplierID] IS NULL) OR ([SupplierID] = @Original_Supplie" +
+                "rID)) AND ((@IsNull_ValidFrom = 1 AND [ValidFrom] IS NULL) OR ([ValidFrom] = @Or" +
+                "iginal_ValidFrom)) AND ((@IsNull_ValidTo = 1 AND [ValidTo] IS NULL) OR ([ValidTo" +
+                "] = @Original_ValidTo)) AND ((@IsNull_UN = 1 AND [UN] IS NULL) OR ([UN] = @Origi" +
+                "nal_UN)) AND ((@IsNull_PW = 1 AND [PW] IS NULL) OR ([PW] = @Original_PW)) AND ((" +
+                "@IsNull_Address = 1 AND [Address] IS NULL) OR ([Address] = @Original_Address)) A" +
+                "ND ((@IsNull_City = 1 AND [City] IS NULL) OR ([City] = @Original_City)) AND ((@I" +
+                "sNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_D" +
+                "escription)) AND ((@IsNull_State = 1 AND [State] IS NULL) OR ([State] = @Origina" +
+                "l_State)) AND ((@IsNull_Zip = 1 AND [Zip] IS NULL) OR ([Zip] = @Original_Zip)) A" +
+                "ND ((@IsNull_Admin = 1 AND [Admin] IS NULL) OR ([Admin] = @Original_Admin)));\r\nS" +
+                "ELECT pkid, Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address," +
+                " City, Description, State, Zip, Admin FROM Contact WHERE (pkid = @pkid)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Phone", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Phone", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -14340,6 +14530,7 @@ SELECT pkid, Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@State", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "State", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Zip", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Zip", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Admin", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Admin", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_pkid", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pkid", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Name", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -14367,6 +14558,8 @@ SELECT pkid, Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_State", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "State", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Zip", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Zip", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Zip", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Zip", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Admin", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Admin", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Admin", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Admin", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pkid", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "pkid", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -14384,7 +14577,7 @@ SELECT pkid, Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT pkid, Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address," +
-                " City, Description, State, Zip FROM Contact";
+                " City, Description, State, Zip, Admin FROM Contact";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -14445,7 +14638,7 @@ SELECT pkid, Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_pkid, string Original_Name, string Original_Phone, string Original_Email, global::System.Nullable<int> Original_SupplierID, global::System.Nullable<global::System.DateTime> Original_ValidFrom, global::System.Nullable<global::System.DateTime> Original_ValidTo, string Original_UN, string Original_PW, string Original_Address, string Original_City, string Original_Description, string Original_State, string Original_Zip) {
+        public virtual int Delete(int Original_pkid, string Original_Name, string Original_Phone, string Original_Email, global::System.Nullable<int> Original_SupplierID, global::System.Nullable<global::System.DateTime> Original_ValidFrom, global::System.Nullable<global::System.DateTime> Original_ValidTo, string Original_UN, string Original_PW, string Original_Address, string Original_City, string Original_Description, string Original_State, string Original_Zip, global::System.Nullable<int> Original_Admin) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_pkid));
             if ((Original_Name == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
@@ -14551,6 +14744,14 @@ SELECT pkid, Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address
                 this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[26].Value = ((string)(Original_Zip));
             }
+            if ((Original_Admin.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[28].Value = ((int)(Original_Admin.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[28].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -14571,7 +14772,7 @@ SELECT pkid, Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string Name, string Phone, string Email, global::System.Nullable<int> SupplierID, global::System.Nullable<global::System.DateTime> ValidFrom, global::System.Nullable<global::System.DateTime> ValidTo, string UN, string PW, string Address, string City, string Description, string State, string Zip) {
+        public virtual int Insert(string Name, string Phone, string Email, global::System.Nullable<int> SupplierID, global::System.Nullable<global::System.DateTime> ValidFrom, global::System.Nullable<global::System.DateTime> ValidTo, string UN, string PW, string Address, string City, string Description, string State, string Zip, global::System.Nullable<int> Admin) {
             if ((Name == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -14650,6 +14851,12 @@ SELECT pkid, Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address
             else {
                 this.Adapter.InsertCommand.Parameters[12].Value = ((string)(Zip));
             }
+            if ((Admin.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[13].Value = ((int)(Admin.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -14684,6 +14891,7 @@ SELECT pkid, Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address
                     string Description, 
                     string State, 
                     string Zip, 
+                    global::System.Nullable<int> Admin, 
                     int Original_pkid, 
                     string Original_Name, 
                     string Original_Phone, 
@@ -14698,6 +14906,7 @@ SELECT pkid, Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address
                     string Original_Description, 
                     string Original_State, 
                     string Original_Zip, 
+                    global::System.Nullable<int> Original_Admin, 
                     int pkid) {
             if ((Name == null)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
@@ -14777,112 +14986,126 @@ SELECT pkid, Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address
             else {
                 this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Zip));
             }
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_pkid));
-            if ((Original_Name == null)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+            if ((Admin.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Admin.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_Name));
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_pkid));
+            if ((Original_Name == null)) {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_Name));
             }
             if ((Original_Phone == null)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_Phone));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_Phone));
             }
             if ((Original_Email == null)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((string)(Original_Email));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((string)(Original_Email));
             }
             if ((Original_SupplierID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(Original_SupplierID.Value));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((int)(Original_SupplierID.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
             }
             if ((Original_ValidFrom.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((System.DateTime)(Original_ValidFrom.Value));
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((System.DateTime)(Original_ValidFrom.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
             }
             if ((Original_ValidTo.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((System.DateTime)(Original_ValidTo.Value));
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((System.DateTime)(Original_ValidTo.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
             }
             if ((Original_UN == null)) {
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[27].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((string)(Original_UN));
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((string)(Original_UN));
             }
             if ((Original_PW == null)) {
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[29].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[30].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[29].Value = ((string)(Original_PW));
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((string)(Original_PW));
             }
             if ((Original_Address == null)) {
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[31].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[32].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((string)(Original_Address));
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((string)(Original_Address));
             }
             if ((Original_City == null)) {
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[33].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((string)(Original_City));
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((string)(Original_City));
             }
             if ((Original_Description == null)) {
-                this.Adapter.UpdateCommand.Parameters[34].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[35].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[36].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[34].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[35].Value = ((string)(Original_Description));
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((string)(Original_Description));
             }
             if ((Original_State == null)) {
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[37].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[38].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[37].Value = ((string)(Original_State));
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((string)(Original_State));
             }
             if ((Original_Zip == null)) {
-                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[39].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[40].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[39].Value = ((string)(Original_Zip));
+                this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[40].Value = ((string)(Original_Zip));
             }
-            this.Adapter.UpdateCommand.Parameters[40].Value = ((int)(pkid));
+            if ((Original_Admin.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[42].Value = ((int)(Original_Admin.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[42].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[43].Value = ((int)(pkid));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -14917,6 +15140,7 @@ SELECT pkid, Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address
                     string Description, 
                     string State, 
                     string Zip, 
+                    global::System.Nullable<int> Admin, 
                     int Original_pkid, 
                     string Original_Name, 
                     string Original_Phone, 
@@ -14930,8 +15154,9 @@ SELECT pkid, Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address
                     string Original_City, 
                     string Original_Description, 
                     string Original_State, 
-                    string Original_Zip) {
-            return this.Update(Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address, City, Description, State, Zip, Original_pkid, Original_Name, Original_Phone, Original_Email, Original_SupplierID, Original_ValidFrom, Original_ValidTo, Original_UN, Original_PW, Original_Address, Original_City, Original_Description, Original_State, Original_Zip, Original_pkid);
+                    string Original_Zip, 
+                    global::System.Nullable<int> Original_Admin) {
+            return this.Update(Name, Phone, Email, SupplierID, ValidFrom, ValidTo, UN, PW, Address, City, Description, State, Zip, Admin, Original_pkid, Original_Name, Original_Phone, Original_Email, Original_SupplierID, Original_ValidFrom, Original_ValidTo, Original_UN, Original_PW, Original_Address, Original_City, Original_Description, Original_State, Original_Zip, Original_Admin, Original_pkid);
         }
     }
     
@@ -16040,10 +16265,11 @@ SELECT pkid, Name, ParentLocationID, ValidFrom, ValidTo FROM Location WHERE (pki
             tableMapping.ColumnMappings.Add("SupplierID", "SupplierID");
             tableMapping.ColumnMappings.Add("OrderDate", "OrderDate");
             tableMapping.ColumnMappings.Add("Description", "Description");
+            tableMapping.ColumnMappings.Add("ExpectedDate", "ExpectedDate");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Order] WHERE (([pkid] = @Original_pkid) AND ((@IsNull_SupplierID = 1 AND [SupplierID] IS NULL) OR ([SupplierID] = @Original_SupplierID)) AND ((@IsNull_OrderDate = 1 AND [OrderDate] IS NULL) OR ([OrderDate] = @Original_OrderDate)) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Order] WHERE (([pkid] = @Original_pkid) AND ((@IsNull_SupplierID = 1 AND [SupplierID] IS NULL) OR ([SupplierID] = @Original_SupplierID)) AND ((@IsNull_OrderDate = 1 AND [OrderDate] IS NULL) OR ([OrderDate] = @Original_OrderDate)) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)) AND ((@IsNull_ExpectedDate = 1 AND [ExpectedDate] IS NULL) OR ([ExpectedDate] = @Original_ExpectedDate)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_pkid", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pkid", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SupplierID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SupplierID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -16052,23 +16278,28 @@ SELECT pkid, Name, ParentLocationID, ValidFrom, ValidTo FROM Location WHERE (pki
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OrderDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OrderDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Description", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ExpectedDate", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExpectedDate", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ExpectedDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExpectedDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [Order] ([SupplierID], [OrderDate], [Description]) VALUES (@SupplierI" +
-                "D, @OrderDate, @Description);\r\nSELECT pkid, SupplierID, OrderDate, Description F" +
-                "ROM [Order] WHERE (pkid = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [Order] ([SupplierID], [OrderDate], [Description], [ExpectedDate]) VA" +
+                "LUES (@SupplierID, @OrderDate, @Description, @ExpectedDate);\r\nSELECT pkid, Suppl" +
+                "ierID, OrderDate, Description, ExpectedDate FROM [Order] WHERE (pkid = SCOPE_IDE" +
+                "NTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SupplierID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SupplierID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OrderDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OrderDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ExpectedDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExpectedDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [Order] SET [SupplierID] = @SupplierID, [OrderDate] = @OrderDate, [Description] = @Description WHERE (([pkid] = @Original_pkid) AND ((@IsNull_SupplierID = 1 AND [SupplierID] IS NULL) OR ([SupplierID] = @Original_SupplierID)) AND ((@IsNull_OrderDate = 1 AND [OrderDate] IS NULL) OR ([OrderDate] = @Original_OrderDate)) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)));
-SELECT pkid, SupplierID, OrderDate, Description FROM [Order] WHERE (pkid = @pkid)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [Order] SET [SupplierID] = @SupplierID, [OrderDate] = @OrderDate, [Description] = @Description, [ExpectedDate] = @ExpectedDate WHERE (([pkid] = @Original_pkid) AND ((@IsNull_SupplierID = 1 AND [SupplierID] IS NULL) OR ([SupplierID] = @Original_SupplierID)) AND ((@IsNull_OrderDate = 1 AND [OrderDate] IS NULL) OR ([OrderDate] = @Original_OrderDate)) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)) AND ((@IsNull_ExpectedDate = 1 AND [ExpectedDate] IS NULL) OR ([ExpectedDate] = @Original_ExpectedDate)));
+SELECT pkid, SupplierID, OrderDate, Description, ExpectedDate FROM [Order] WHERE (pkid = @pkid)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SupplierID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SupplierID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OrderDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OrderDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ExpectedDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExpectedDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_pkid", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pkid", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SupplierID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SupplierID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SupplierID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SupplierID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -16076,6 +16307,8 @@ SELECT pkid, SupplierID, OrderDate, Description FROM [Order] WHERE (pkid = @pkid
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OrderDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OrderDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Description", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ExpectedDate", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExpectedDate", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ExpectedDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExpectedDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pkid", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "pkid", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -16092,7 +16325,7 @@ SELECT pkid, SupplierID, OrderDate, Description FROM [Order] WHERE (pkid = @pkid
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT pkid, SupplierID, OrderDate, Description FROM [Order]";
+            this._commandCollection[0].CommandText = "SELECT pkid, SupplierID, OrderDate, Description, ExpectedDate FROM [Order]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -16153,7 +16386,7 @@ SELECT pkid, SupplierID, OrderDate, Description FROM [Order] WHERE (pkid = @pkid
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_pkid, global::System.Nullable<int> Original_SupplierID, global::System.Nullable<global::System.DateTime> Original_OrderDate, string Original_Description) {
+        public virtual int Delete(int Original_pkid, global::System.Nullable<int> Original_SupplierID, global::System.Nullable<global::System.DateTime> Original_OrderDate, string Original_Description, global::System.Nullable<global::System.DateTime> Original_ExpectedDate) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_pkid));
             if ((Original_SupplierID.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
@@ -16179,6 +16412,14 @@ SELECT pkid, SupplierID, OrderDate, Description FROM [Order] WHERE (pkid = @pkid
                 this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_Description));
             }
+            if ((Original_ExpectedDate.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((System.DateTime)(Original_ExpectedDate.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -16199,7 +16440,7 @@ SELECT pkid, SupplierID, OrderDate, Description FROM [Order] WHERE (pkid = @pkid
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<int> SupplierID, global::System.Nullable<global::System.DateTime> OrderDate, string Description) {
+        public virtual int Insert(global::System.Nullable<int> SupplierID, global::System.Nullable<global::System.DateTime> OrderDate, string Description, global::System.Nullable<global::System.DateTime> ExpectedDate) {
             if ((SupplierID.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = ((int)(SupplierID.Value));
             }
@@ -16217,6 +16458,12 @@ SELECT pkid, SupplierID, OrderDate, Description FROM [Order] WHERE (pkid = @pkid
             }
             else {
                 this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Description));
+            }
+            if ((ExpectedDate.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((System.DateTime)(ExpectedDate.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -16238,7 +16485,7 @@ SELECT pkid, SupplierID, OrderDate, Description FROM [Order] WHERE (pkid = @pkid
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> SupplierID, global::System.Nullable<global::System.DateTime> OrderDate, string Description, int Original_pkid, global::System.Nullable<int> Original_SupplierID, global::System.Nullable<global::System.DateTime> Original_OrderDate, string Original_Description, int pkid) {
+        public virtual int Update(global::System.Nullable<int> SupplierID, global::System.Nullable<global::System.DateTime> OrderDate, string Description, global::System.Nullable<global::System.DateTime> ExpectedDate, int Original_pkid, global::System.Nullable<int> Original_SupplierID, global::System.Nullable<global::System.DateTime> Original_OrderDate, string Original_Description, global::System.Nullable<global::System.DateTime> Original_ExpectedDate, int pkid) {
             if ((SupplierID.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(SupplierID.Value));
             }
@@ -16257,32 +16504,46 @@ SELECT pkid, SupplierID, OrderDate, Description FROM [Order] WHERE (pkid = @pkid
             else {
                 this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Description));
             }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_pkid));
-            if ((Original_SupplierID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_SupplierID.Value));
+            if ((ExpectedDate.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((System.DateTime)(ExpectedDate.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_pkid));
+            if ((Original_SupplierID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_SupplierID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
             if ((Original_OrderDate.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(Original_OrderDate.Value));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(Original_OrderDate.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
             if ((Original_Description == null)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_Description));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_Description));
             }
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(pkid));
+            if ((Original_ExpectedDate.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((System.DateTime)(Original_ExpectedDate.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(pkid));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -16303,8 +16564,8 @@ SELECT pkid, SupplierID, OrderDate, Description FROM [Order] WHERE (pkid = @pkid
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> SupplierID, global::System.Nullable<global::System.DateTime> OrderDate, string Description, int Original_pkid, global::System.Nullable<int> Original_SupplierID, global::System.Nullable<global::System.DateTime> Original_OrderDate, string Original_Description) {
-            return this.Update(SupplierID, OrderDate, Description, Original_pkid, Original_SupplierID, Original_OrderDate, Original_Description, Original_pkid);
+        public virtual int Update(global::System.Nullable<int> SupplierID, global::System.Nullable<global::System.DateTime> OrderDate, string Description, global::System.Nullable<global::System.DateTime> ExpectedDate, int Original_pkid, global::System.Nullable<int> Original_SupplierID, global::System.Nullable<global::System.DateTime> Original_OrderDate, string Original_Description, global::System.Nullable<global::System.DateTime> Original_ExpectedDate) {
+            return this.Update(SupplierID, OrderDate, Description, ExpectedDate, Original_pkid, Original_SupplierID, Original_OrderDate, Original_Description, Original_ExpectedDate, Original_pkid);
         }
     }
     
@@ -18509,10 +18770,12 @@ SELECT pkid, Name, ProductCategoryID, UOMID, AvgValue, ValidFrom, ValidTo, Warni
             tableMapping.ColumnMappings.Add("InheritAvgValue", "InheritAvgValue");
             tableMapping.ColumnMappings.Add("WarningQty", "WarningQty");
             tableMapping.ColumnMappings.Add("InheritWarningQty", "InheritWarningQty");
+            tableMapping.ColumnMappings.Add("Perishable", "Perishable");
+            tableMapping.ColumnMappings.Add("InheritPerishable", "InheritPerishable");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [ProductCategory] WHERE (([pkid] = @Original_pkid) AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@IsNull_ParentCategoryID = 1 AND [ParentCategoryID] IS NULL) OR ([ParentCategoryID] = @Original_ParentCategoryID)) AND ((@IsNull_ValidFrom = 1 AND [ValidFrom] IS NULL) OR ([ValidFrom] = @Original_ValidFrom)) AND ((@IsNull_ValidTo = 1 AND [ValidTo] IS NULL) OR ([ValidTo] = @Original_ValidTo)) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)) AND ((@IsNull_AvgValue = 1 AND [AvgValue] IS NULL) OR ([AvgValue] = @Original_AvgValue)) AND ((@IsNull_InheritAvgValue = 1 AND [InheritAvgValue] IS NULL) OR ([InheritAvgValue] = @Original_InheritAvgValue)) AND ((@IsNull_InheritUOM = 1 AND [InheritUOM] IS NULL) OR ([InheritUOM] = @Original_InheritUOM)) AND ((@IsNull_InheritValidity = 1 AND [InheritValidity] IS NULL) OR ([InheritValidity] = @Original_InheritValidity)) AND ((@IsNull_InheritWarningQty = 1 AND [InheritWarningQty] IS NULL) OR ([InheritWarningQty] = @Original_InheritWarningQty)) AND ((@IsNull_UOMID = 1 AND [UOMID] IS NULL) OR ([UOMID] = @Original_UOMID)) AND ((@IsNull_WarningQty = 1 AND [WarningQty] IS NULL) OR ([WarningQty] = @Original_WarningQty)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [ProductCategory] WHERE (([pkid] = @Original_pkid) AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@IsNull_ParentCategoryID = 1 AND [ParentCategoryID] IS NULL) OR ([ParentCategoryID] = @Original_ParentCategoryID)) AND ((@IsNull_ValidFrom = 1 AND [ValidFrom] IS NULL) OR ([ValidFrom] = @Original_ValidFrom)) AND ((@IsNull_ValidTo = 1 AND [ValidTo] IS NULL) OR ([ValidTo] = @Original_ValidTo)) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)) AND ((@IsNull_AvgValue = 1 AND [AvgValue] IS NULL) OR ([AvgValue] = @Original_AvgValue)) AND ((@IsNull_InheritAvgValue = 1 AND [InheritAvgValue] IS NULL) OR ([InheritAvgValue] = @Original_InheritAvgValue)) AND ((@IsNull_InheritUOM = 1 AND [InheritUOM] IS NULL) OR ([InheritUOM] = @Original_InheritUOM)) AND ((@IsNull_InheritValidity = 1 AND [InheritValidity] IS NULL) OR ([InheritValidity] = @Original_InheritValidity)) AND ((@IsNull_InheritWarningQty = 1 AND [InheritWarningQty] IS NULL) OR ([InheritWarningQty] = @Original_InheritWarningQty)) AND ((@IsNull_UOMID = 1 AND [UOMID] IS NULL) OR ([UOMID] = @Original_UOMID)) AND ((@IsNull_WarningQty = 1 AND [WarningQty] IS NULL) OR ([WarningQty] = @Original_WarningQty)) AND ((@IsNull_InheritPerishable = 1 AND [InheritPerishable] IS NULL) OR ([InheritPerishable] = @Original_InheritPerishable)) AND ((@IsNull_Perishable = 1 AND [Perishable] IS NULL) OR ([Perishable] = @Original_Perishable)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_pkid", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pkid", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Name", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -18539,10 +18802,14 @@ SELECT pkid, Name, ProductCategoryID, UOMID, AvgValue, ValidFrom, ValidTo, Warni
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UOMID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UOMID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_WarningQty", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WarningQty", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WarningQty", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WarningQty", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_InheritPerishable", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InheritPerishable", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_InheritPerishable", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InheritPerishable", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Perishable", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Perishable", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Perishable", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Perishable", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [ProductCategory] ([Name], [ParentCategoryID], [ValidFrom], [ValidTo], [Description], [AvgValue], [InheritAvgValue], [InheritUOM], [InheritValidity], [InheritWarningQty], [UOMID], [WarningQty]) VALUES (@Name, @ParentCategoryID, @ValidFrom, @ValidTo, @Description, @AvgValue, @InheritAvgValue, @InheritUOM, @InheritValidity, @InheritWarningQty, @UOMID, @WarningQty);
-SELECT pkid, Name, ParentCategoryID, ValidFrom, ValidTo, Description, AvgValue, InheritAvgValue, InheritUOM, InheritValidity, InheritWarningQty, UOMID, WarningQty FROM ProductCategory WHERE (pkid = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [ProductCategory] ([Name], [ParentCategoryID], [ValidFrom], [ValidTo], [Description], [AvgValue], [InheritAvgValue], [InheritUOM], [InheritValidity], [InheritWarningQty], [UOMID], [WarningQty], [InheritPerishable], [Perishable]) VALUES (@Name, @ParentCategoryID, @ValidFrom, @ValidTo, @Description, @AvgValue, @InheritAvgValue, @InheritUOM, @InheritValidity, @InheritWarningQty, @UOMID, @WarningQty, @InheritPerishable, @Perishable);
+SELECT pkid, Name, ParentCategoryID, ValidFrom, ValidTo, Description, AvgValue, InheritAvgValue, InheritUOM, InheritValidity, InheritWarningQty, UOMID, WarningQty, InheritPerishable, Perishable FROM ProductCategory WHERE (pkid = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ParentCategoryID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ParentCategoryID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -18556,31 +18823,37 @@ SELECT pkid, Name, ParentCategoryID, ValidFrom, ValidTo, Description, AvgValue, 
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InheritWarningQty", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InheritWarningQty", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UOMID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UOMID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WarningQty", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WarningQty", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InheritPerishable", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InheritPerishable", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Perishable", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Perishable", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = "UPDATE [ProductCategory] SET [Name] = @Name, [ParentCategoryID] = @ParentCategory" +
                 "ID, [ValidFrom] = @ValidFrom, [ValidTo] = @ValidTo, [Description] = @Description" +
                 ", [AvgValue] = @AvgValue, [InheritAvgValue] = @InheritAvgValue, [InheritUOM] = @" +
                 "InheritUOM, [InheritValidity] = @InheritValidity, [InheritWarningQty] = @Inherit" +
-                "WarningQty, [UOMID] = @UOMID, [WarningQty] = @WarningQty WHERE (([pkid] = @Origi" +
-                "nal_pkid) AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name" +
-                ")) AND ((@IsNull_ParentCategoryID = 1 AND [ParentCategoryID] IS NULL) OR ([Paren" +
-                "tCategoryID] = @Original_ParentCategoryID)) AND ((@IsNull_ValidFrom = 1 AND [Val" +
-                "idFrom] IS NULL) OR ([ValidFrom] = @Original_ValidFrom)) AND ((@IsNull_ValidTo =" +
-                " 1 AND [ValidTo] IS NULL) OR ([ValidTo] = @Original_ValidTo)) AND ((@IsNull_Desc" +
-                "ription = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description" +
-                ")) AND ((@IsNull_AvgValue = 1 AND [AvgValue] IS NULL) OR ([AvgValue] = @Original" +
-                "_AvgValue)) AND ((@IsNull_InheritAvgValue = 1 AND [InheritAvgValue] IS NULL) OR " +
-                "([InheritAvgValue] = @Original_InheritAvgValue)) AND ((@IsNull_InheritUOM = 1 AN" +
-                "D [InheritUOM] IS NULL) OR ([InheritUOM] = @Original_InheritUOM)) AND ((@IsNull_" +
-                "InheritValidity = 1 AND [InheritValidity] IS NULL) OR ([InheritValidity] = @Orig" +
-                "inal_InheritValidity)) AND ((@IsNull_InheritWarningQty = 1 AND [InheritWarningQt" +
-                "y] IS NULL) OR ([InheritWarningQty] = @Original_InheritWarningQty)) AND ((@IsNul" +
-                "l_UOMID = 1 AND [UOMID] IS NULL) OR ([UOMID] = @Original_UOMID)) AND ((@IsNull_W" +
-                "arningQty = 1 AND [WarningQty] IS NULL) OR ([WarningQty] = @Original_WarningQty)" +
-                "));\r\nSELECT pkid, Name, ParentCategoryID, ValidFrom, ValidTo, Description, AvgVa" +
-                "lue, InheritAvgValue, InheritUOM, InheritValidity, InheritWarningQty, UOMID, War" +
-                "ningQty FROM ProductCategory WHERE (pkid = @pkid)";
+                "WarningQty, [UOMID] = @UOMID, [WarningQty] = @WarningQty, [InheritPerishable] = " +
+                "@InheritPerishable, [Perishable] = @Perishable WHERE (([pkid] = @Original_pkid) " +
+                "AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@" +
+                "IsNull_ParentCategoryID = 1 AND [ParentCategoryID] IS NULL) OR ([ParentCategoryI" +
+                "D] = @Original_ParentCategoryID)) AND ((@IsNull_ValidFrom = 1 AND [ValidFrom] IS" +
+                " NULL) OR ([ValidFrom] = @Original_ValidFrom)) AND ((@IsNull_ValidTo = 1 AND [Va" +
+                "lidTo] IS NULL) OR ([ValidTo] = @Original_ValidTo)) AND ((@IsNull_Description = " +
+                "1 AND [Description] IS NULL) OR ([Description] = @Original_Description)) AND ((@" +
+                "IsNull_AvgValue = 1 AND [AvgValue] IS NULL) OR ([AvgValue] = @Original_AvgValue)" +
+                ") AND ((@IsNull_InheritAvgValue = 1 AND [InheritAvgValue] IS NULL) OR ([InheritA" +
+                "vgValue] = @Original_InheritAvgValue)) AND ((@IsNull_InheritUOM = 1 AND [Inherit" +
+                "UOM] IS NULL) OR ([InheritUOM] = @Original_InheritUOM)) AND ((@IsNull_InheritVal" +
+                "idity = 1 AND [InheritValidity] IS NULL) OR ([InheritValidity] = @Original_Inher" +
+                "itValidity)) AND ((@IsNull_InheritWarningQty = 1 AND [InheritWarningQty] IS NULL" +
+                ") OR ([InheritWarningQty] = @Original_InheritWarningQty)) AND ((@IsNull_UOMID = " +
+                "1 AND [UOMID] IS NULL) OR ([UOMID] = @Original_UOMID)) AND ((@IsNull_WarningQty " +
+                "= 1 AND [WarningQty] IS NULL) OR ([WarningQty] = @Original_WarningQty)) AND ((@I" +
+                "sNull_InheritPerishable = 1 AND [InheritPerishable] IS NULL) OR ([InheritPerisha" +
+                "ble] = @Original_InheritPerishable)) AND ((@IsNull_Perishable = 1 AND [Perishabl" +
+                "e] IS NULL) OR ([Perishable] = @Original_Perishable)));\r\nSELECT pkid, Name, Pare" +
+                "ntCategoryID, ValidFrom, ValidTo, Description, AvgValue, InheritAvgValue, Inheri" +
+                "tUOM, InheritValidity, InheritWarningQty, UOMID, WarningQty, InheritPerishable, " +
+                "Perishable FROM ProductCategory WHERE (pkid = @pkid)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ParentCategoryID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ParentCategoryID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -18594,6 +18867,8 @@ SELECT pkid, Name, ParentCategoryID, ValidFrom, ValidTo, Description, AvgValue, 
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InheritWarningQty", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InheritWarningQty", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UOMID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UOMID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WarningQty", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WarningQty", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InheritPerishable", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InheritPerishable", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Perishable", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Perishable", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_pkid", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pkid", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Name", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -18619,6 +18894,10 @@ SELECT pkid, Name, ParentCategoryID, ValidFrom, ValidTo, Description, AvgValue, 
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UOMID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UOMID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_WarningQty", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WarningQty", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WarningQty", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WarningQty", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_InheritPerishable", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InheritPerishable", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_InheritPerishable", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InheritPerishable", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Perishable", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Perishable", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Perishable", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Perishable", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pkid", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "pkid", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -18637,7 +18916,7 @@ SELECT pkid, Name, ParentCategoryID, ValidFrom, ValidTo, Description, AvgValue, 
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT pkid, Name, ParentCategoryID, ValidFrom, ValidTo, Description, AvgValue, I" +
                 "nheritAvgValue, InheritUOM, InheritValidity, InheritWarningQty, UOMID, WarningQt" +
-                "y FROM ProductCategory";
+                "y, InheritPerishable, Perishable FROM ProductCategory";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -18698,7 +18977,7 @@ SELECT pkid, Name, ParentCategoryID, ValidFrom, ValidTo, Description, AvgValue, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_pkid, string Original_Name, global::System.Nullable<int> Original_ParentCategoryID, global::System.Nullable<global::System.DateTime> Original_ValidFrom, global::System.Nullable<global::System.DateTime> Original_ValidTo, string Original_Description, global::System.Nullable<double> Original_AvgValue, global::System.Nullable<int> Original_InheritAvgValue, global::System.Nullable<int> Original_InheritUOM, global::System.Nullable<int> Original_InheritValidity, global::System.Nullable<int> Original_InheritWarningQty, global::System.Nullable<int> Original_UOMID, global::System.Nullable<double> Original_WarningQty) {
+        public virtual int Delete(int Original_pkid, string Original_Name, global::System.Nullable<int> Original_ParentCategoryID, global::System.Nullable<global::System.DateTime> Original_ValidFrom, global::System.Nullable<global::System.DateTime> Original_ValidTo, string Original_Description, global::System.Nullable<double> Original_AvgValue, global::System.Nullable<int> Original_InheritAvgValue, global::System.Nullable<int> Original_InheritUOM, global::System.Nullable<int> Original_InheritValidity, global::System.Nullable<int> Original_InheritWarningQty, global::System.Nullable<int> Original_UOMID, global::System.Nullable<double> Original_WarningQty, global::System.Nullable<int> Original_InheritPerishable, global::System.Nullable<int> Original_Perishable) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_pkid));
             if ((Original_Name == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
@@ -18796,6 +19075,22 @@ SELECT pkid, Name, ParentCategoryID, ValidFrom, ValidTo, Description, AvgValue, 
                 this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[24].Value = global::System.DBNull.Value;
             }
+            if ((Original_InheritPerishable.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[26].Value = ((int)(Original_InheritPerishable.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[26].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Perishable.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[28].Value = ((int)(Original_Perishable.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[28].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -18816,7 +19111,7 @@ SELECT pkid, Name, ParentCategoryID, ValidFrom, ValidTo, Description, AvgValue, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string Name, global::System.Nullable<int> ParentCategoryID, global::System.Nullable<global::System.DateTime> ValidFrom, global::System.Nullable<global::System.DateTime> ValidTo, string Description, global::System.Nullable<double> AvgValue, global::System.Nullable<int> InheritAvgValue, global::System.Nullable<int> InheritUOM, global::System.Nullable<int> InheritValidity, global::System.Nullable<int> InheritWarningQty, global::System.Nullable<int> UOMID, global::System.Nullable<double> WarningQty) {
+        public virtual int Insert(string Name, global::System.Nullable<int> ParentCategoryID, global::System.Nullable<global::System.DateTime> ValidFrom, global::System.Nullable<global::System.DateTime> ValidTo, string Description, global::System.Nullable<double> AvgValue, global::System.Nullable<int> InheritAvgValue, global::System.Nullable<int> InheritUOM, global::System.Nullable<int> InheritValidity, global::System.Nullable<int> InheritWarningQty, global::System.Nullable<int> UOMID, global::System.Nullable<double> WarningQty, global::System.Nullable<int> InheritPerishable, global::System.Nullable<int> Perishable) {
             if ((Name == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -18889,6 +19184,18 @@ SELECT pkid, Name, ParentCategoryID, ValidFrom, ValidTo, Description, AvgValue, 
             else {
                 this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
+            if ((InheritPerishable.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[12].Value = ((int)(InheritPerishable.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            if ((Perishable.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[13].Value = ((int)(Perishable.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -18922,6 +19229,8 @@ SELECT pkid, Name, ParentCategoryID, ValidFrom, ValidTo, Description, AvgValue, 
                     global::System.Nullable<int> InheritWarningQty, 
                     global::System.Nullable<int> UOMID, 
                     global::System.Nullable<double> WarningQty, 
+                    global::System.Nullable<int> InheritPerishable, 
+                    global::System.Nullable<int> Perishable, 
                     int Original_pkid, 
                     string Original_Name, 
                     global::System.Nullable<int> Original_ParentCategoryID, 
@@ -18935,6 +19244,8 @@ SELECT pkid, Name, ParentCategoryID, ValidFrom, ValidTo, Description, AvgValue, 
                     global::System.Nullable<int> Original_InheritWarningQty, 
                     global::System.Nullable<int> Original_UOMID, 
                     global::System.Nullable<double> Original_WarningQty, 
+                    global::System.Nullable<int> Original_InheritPerishable, 
+                    global::System.Nullable<int> Original_Perishable, 
                     int pkid) {
             if ((Name == null)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
@@ -19008,104 +19319,132 @@ SELECT pkid, Name, ParentCategoryID, ValidFrom, ValidTo, Description, AvgValue, 
             else {
                 this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_pkid));
+            if ((InheritPerishable.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(InheritPerishable.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            if ((Perishable.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Perishable.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_pkid));
             if ((Original_Name == null)) {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_Name));
-            }
-            if ((Original_ParentCategoryID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(Original_ParentCategoryID.Value));
-            }
-            else {
                 this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
             }
-            if ((Original_ValidFrom.HasValue == true)) {
+            else {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_Name));
+            }
+            if ((Original_ParentCategoryID.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((System.DateTime)(Original_ValidFrom.Value));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_ParentCategoryID.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
-            if ((Original_ValidTo.HasValue == true)) {
+            if ((Original_ValidFrom.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((System.DateTime)(Original_ValidTo.Value));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((System.DateTime)(Original_ValidFrom.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
             }
-            if ((Original_Description == null)) {
+            if ((Original_ValidTo.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((System.DateTime)(Original_ValidTo.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((string)(Original_Description));
-            }
-            if ((Original_AvgValue.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((double)(Original_AvgValue.Value));
-            }
-            else {
+            if ((Original_Description == null)) {
                 this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
             }
-            if ((Original_InheritAvgValue.HasValue == true)) {
+            else {
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((string)(Original_Description));
+            }
+            if ((Original_AvgValue.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((int)(Original_InheritAvgValue.Value));
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((double)(Original_AvgValue.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
             }
-            if ((Original_InheritUOM.HasValue == true)) {
+            if ((Original_InheritAvgValue.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((int)(Original_InheritUOM.Value));
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((int)(Original_InheritAvgValue.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
             }
-            if ((Original_InheritValidity.HasValue == true)) {
+            if ((Original_InheritUOM.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((int)(Original_InheritValidity.Value));
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((int)(Original_InheritUOM.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[30].Value = global::System.DBNull.Value;
             }
-            if ((Original_InheritWarningQty.HasValue == true)) {
+            if ((Original_InheritValidity.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((int)(Original_InheritWarningQty.Value));
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((int)(Original_InheritValidity.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[32].Value = global::System.DBNull.Value;
             }
-            if ((Original_UOMID.HasValue == true)) {
+            if ((Original_InheritWarningQty.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[34].Value = ((int)(Original_UOMID.Value));
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((int)(Original_InheritWarningQty.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
             }
-            if ((Original_WarningQty.HasValue == true)) {
+            if ((Original_UOMID.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((double)(Original_WarningQty.Value));
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((int)(Original_UOMID.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[36].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[37].Value = ((int)(pkid));
+            if ((Original_WarningQty.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((double)(Original_WarningQty.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[38].Value = global::System.DBNull.Value;
+            }
+            if ((Original_InheritPerishable.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[40].Value = ((int)(Original_InheritPerishable.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[40].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Perishable.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[42].Value = ((int)(Original_Perishable.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[42].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[43].Value = ((int)(pkid));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -19139,6 +19478,8 @@ SELECT pkid, Name, ParentCategoryID, ValidFrom, ValidTo, Description, AvgValue, 
                     global::System.Nullable<int> InheritWarningQty, 
                     global::System.Nullable<int> UOMID, 
                     global::System.Nullable<double> WarningQty, 
+                    global::System.Nullable<int> InheritPerishable, 
+                    global::System.Nullable<int> Perishable, 
                     int Original_pkid, 
                     string Original_Name, 
                     global::System.Nullable<int> Original_ParentCategoryID, 
@@ -19151,8 +19492,10 @@ SELECT pkid, Name, ParentCategoryID, ValidFrom, ValidTo, Description, AvgValue, 
                     global::System.Nullable<int> Original_InheritValidity, 
                     global::System.Nullable<int> Original_InheritWarningQty, 
                     global::System.Nullable<int> Original_UOMID, 
-                    global::System.Nullable<double> Original_WarningQty) {
-            return this.Update(Name, ParentCategoryID, ValidFrom, ValidTo, Description, AvgValue, InheritAvgValue, InheritUOM, InheritValidity, InheritWarningQty, UOMID, WarningQty, Original_pkid, Original_Name, Original_ParentCategoryID, Original_ValidFrom, Original_ValidTo, Original_Description, Original_AvgValue, Original_InheritAvgValue, Original_InheritUOM, Original_InheritValidity, Original_InheritWarningQty, Original_UOMID, Original_WarningQty, Original_pkid);
+                    global::System.Nullable<double> Original_WarningQty, 
+                    global::System.Nullable<int> Original_InheritPerishable, 
+                    global::System.Nullable<int> Original_Perishable) {
+            return this.Update(Name, ParentCategoryID, ValidFrom, ValidTo, Description, AvgValue, InheritAvgValue, InheritUOM, InheritValidity, InheritWarningQty, UOMID, WarningQty, InheritPerishable, Perishable, Original_pkid, Original_Name, Original_ParentCategoryID, Original_ValidFrom, Original_ValidTo, Original_Description, Original_AvgValue, Original_InheritAvgValue, Original_InheritUOM, Original_InheritValidity, Original_InheritWarningQty, Original_UOMID, Original_WarningQty, Original_InheritPerishable, Original_Perishable, Original_pkid);
         }
     }
     
