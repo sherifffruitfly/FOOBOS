@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FOOBOS
+namespace FOOBOSEntities
 {
     using System;
     using System.Collections.Generic;

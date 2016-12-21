@@ -7,21 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FOOBOS
+namespace FOOBOSEntities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductLocationLog
+    public partial class OrderLog
     {
         public int pkid { get; set; }
-        public Nullable<int> ProductLocationID { get; set; }
+        public Nullable<int> OrderID { get; set; }
+        public Nullable<int> SupplierID { get; set; }
+        public Nullable<System.DateTime> OrderDate { get; set; }
+        public Nullable<System.DateTime> ExpectedDate { get; set; }
+        public Nullable<int> OrderlineID { get; set; }
+        public string Description { get; set; }
         public Nullable<int> ProductID { get; set; }
         public Nullable<int> ProductCategoryID { get; set; }
-        public Nullable<int> LocationID { get; set; }
-        public string Location { get; set; }
         public Nullable<double> Qty { get; set; }
-        public Nullable<double> AvgValue { get; set; }
+        public Nullable<int> LineNum { get; set; }
+        public Nullable<double> UnitPrice { get; set; }
+        public Nullable<System.DateTime> ReceivedDate { get; set; }
         public string ChangeType { get; set; }
         public Nullable<System.DateTime> ChangeTime { get; set; }
         public Nullable<int> UserID { get; set; }

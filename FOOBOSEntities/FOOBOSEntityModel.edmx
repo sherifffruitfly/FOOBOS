@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="FOOBOSDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="FOOBOSDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Calendar">
           <Key>
             <PropertyRef Name="DateKey" />
@@ -81,6 +81,7 @@
           <Property Name="SupplierID" Type="int" />
           <Property Name="OrderDate" Type="datetime" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="OrderedBy" Type="int" />
           <Property Name="ExpectedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="OrderLine">
@@ -277,6 +278,18 @@
             </Principal>
             <Dependent Role="Location1">
               <PropertyRef Name="ParentLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="OrderedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -555,6 +568,10 @@
             <End Role="Location" EntitySet="Location" />
             <End Role="Location1" EntitySet="Location" />
           </AssociationSet>
+          <AssociationSet Name="FK_Order_Contact" Association="Self.FK_Order_Contact">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
           <AssociationSet Name="FK_Order_Supplier" Association="Self.FK_Order_Supplier">
             <End Role="Supplier" EntitySet="Supplier" />
             <End Role="Order" EntitySet="Order" />
@@ -640,7 +657,8 @@
             <End Role="UserLog" EntitySet="UserLog" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FOOBOSDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -687,11 +705,12 @@
           <Property Name="UN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="PW" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Admin" Type="Int32" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Contact" FromRole="Contact" ToRole="Order" />
+          <NavigationProperty Name="OrderLogs" Relationship="Self.FK_OrderLog_Contact" FromRole="Contact" ToRole="OrderLog" />
           <NavigationProperty Name="ProductLocationLogs" Relationship="Self.FK_ProductLocationLog_Contact" FromRole="Contact" ToRole="ProductLocationLog" />
           <NavigationProperty Name="SaleLogs" Relationship="Self.FK_SaleLog_Contact" FromRole="Contact" ToRole="SaleLog" />
           <NavigationProperty Name="Suppliers" Relationship="Self.FK_Supplier_Contact1" FromRole="Contact" ToRole="Supplier" />
           <NavigationProperty Name="UserLogs" Relationship="Self.FK_UserLog_Contact" FromRole="Contact" ToRole="UserLog" />
-          <NavigationProperty Name="OrderLogs" Relationship="FOOBOSDBModel.FK_OrderLog_Contact" FromRole="Contact" ToRole="OrderLog" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -711,7 +730,7 @@
           <Key>
             <PropertyRef Name="pkid" />
           </Key>
-          <Property Name="pkid" Type="Int32" Nullable="false" />
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ParentLocationID" Type="Int32" />
           <Property Name="ValidFrom" Type="DateTime" Precision="3" />
@@ -725,13 +744,15 @@
             <PropertyRef Name="pkid" />
           </Key>
           <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderNum" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="SupplierID" Type="Int32" />
           <Property Name="OrderDate" Type="DateTime" Precision="3" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OrderedBy" Type="Int32" />
+          <Property Name="ExpectedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Contact" Relationship="Self.FK_Order_Contact" FromRole="Order" ToRole="Contact" />
           <NavigationProperty Name="Supplier" Relationship="Self.FK_Order_Supplier" FromRole="Order" ToRole="Supplier" />
           <NavigationProperty Name="OrderLines" Relationship="Self.FK_OrderLine_Order" FromRole="Order" ToRole="OrderLine" />
-          <Property Name="ExpectedDate" Type="DateTime" Precision="3" />
-          <Property Name="OrderNum" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="OrderLine">
           <Key>
@@ -751,6 +772,28 @@
           <NavigationProperty Name="Product" Relationship="Self.FK_OrderLine_Product" FromRole="OrderLine" ToRole="Product" />
           <NavigationProperty Name="ProductCategory" Relationship="Self.FK_OrderLine_ProductCategory" FromRole="OrderLine" ToRole="ProductCategory" />
           <NavigationProperty Name="ProductLocation" Relationship="Self.FK_OrderLine_ProductLocation" FromRole="OrderLine" ToRole="ProductLocation" />
+        </EntityType>
+        <EntityType Name="OrderLog">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="ExpectedDate" Type="DateTime" Precision="3" />
+          <Property Name="OrderlineID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="ProductCategoryID" Type="Int32" />
+          <Property Name="Qty" Type="Double" />
+          <Property Name="LineNum" Type="Int32" />
+          <Property Name="UnitPrice" Type="Double" />
+          <Property Name="ReceivedDate" Type="DateTime" Precision="3" />
+          <Property Name="ChangeType" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="ChangeTime" Type="DateTime" Precision="3" />
+          <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="Contact" Relationship="Self.FK_OrderLog_Contact" FromRole="OrderLog" ToRole="Contact" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -787,14 +830,14 @@
           <Property Name="InheritAvgValue" Type="Int32" />
           <Property Name="WarningQty" Type="Double" />
           <Property Name="InheritWarningQty" Type="Int32" />
+          <Property Name="Perishable" Type="Int32" />
+          <Property Name="InheritPerishable" Type="Int32" />
           <NavigationProperty Name="OrderLines" Relationship="Self.FK_OrderLine_ProductCategory" FromRole="ProductCategory" ToRole="OrderLine" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Product_ProductCategory" FromRole="ProductCategory" ToRole="Product" />
           <NavigationProperty Name="ProductCategory1" Relationship="Self.FK_ProductCategory_ProductCategory" FromRole="ProductCategory" ToRole="ProductCategory1" />
           <NavigationProperty Name="ProductCategory2" Relationship="Self.FK_ProductCategory_ProductCategory" FromRole="ProductCategory1" ToRole="ProductCategory" />
           <NavigationProperty Name="UOM" Relationship="Self.FK_ProductCategory_UOM" FromRole="ProductCategory" ToRole="UOM" />
           <NavigationProperty Name="ProductLocations" Relationship="Self.FK_ProductLocation_ProductCategory" FromRole="ProductCategory" ToRole="ProductLocation" />
-          <Property Name="Perishable" Type="Int32" />
-          <Property Name="InheritPerishable" Type="Int32" />
         </EntityType>
         <EntityType Name="ProductLocation">
           <Key>
@@ -908,16 +951,16 @@
           <Key>
             <PropertyRef Name="pkid" />
           </Key>
-          <Property Name="pkid" Type="Int32" Nullable="false" />
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BaseID" Type="Int32" />
           <Property Name="ConversionFactor" Type="Double" />
+          <Property Name="Abbrev" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Product_UOM" FromRole="UOM" ToRole="Product" />
           <NavigationProperty Name="ProductCategories" Relationship="Self.FK_ProductCategory_UOM" FromRole="UOM" ToRole="ProductCategory" />
           <NavigationProperty Name="UOM1" Relationship="Self.FK_UOM_UOM" FromRole="UOM" ToRole="UOM1" />
           <NavigationProperty Name="UOM2" Relationship="Self.FK_UOM_UOM" FromRole="UOM1" ToRole="UOM" />
-          <Property Name="Abbrev" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserLog">
           <Key>
@@ -929,6 +972,30 @@
           <Property Name="LogoutTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Contact" Relationship="Self.FK_UserLog_Contact" FromRole="UserLog" ToRole="Contact" />
         </EntityType>
+        <Association Name="FK_Order_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="OrderedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLog_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="OrderLog" Type="Self.OrderLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="pkid" />
+            </Principal>
+            <Dependent Role="OrderLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductLocationLog_Contact">
           <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
           <End Role="ProductLocationLog" Type="Self.ProductLocationLog" Multiplicity="*" />
@@ -1188,6 +1255,7 @@
           <EntitySet Name="Locations" EntityType="Self.Location" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="OrderLines" EntityType="Self.OrderLine" />
+          <EntitySet Name="OrderLogs" EntityType="Self.OrderLog" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
           <EntitySet Name="ProductLocations" EntityType="Self.ProductLocation" />
@@ -1199,6 +1267,14 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="UOMs" EntityType="Self.UOM" />
           <EntitySet Name="UserLogs" EntityType="Self.UserLog" />
+          <AssociationSet Name="FK_Order_Contact" Association="Self.FK_Order_Contact">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLog_Contact" Association="Self.FK_OrderLog_Contact">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="OrderLog" EntitySet="OrderLogs" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductLocationLog_Contact" Association="Self.FK_ProductLocationLog_Contact">
             <End Role="Contact" EntitySet="Contacts" />
             <End Role="ProductLocationLog" EntitySet="ProductLocationLogs" />
@@ -1283,46 +1359,7 @@
             <End Role="UOM" EntitySet="UOMs" />
             <End Role="UOM1" EntitySet="UOMs" />
           </AssociationSet>
-          <EntitySet Name="OrderLogs" EntityType="FOOBOSDBModel.OrderLog" />
-          <AssociationSet Name="FK_OrderLog_Contact" Association="FOOBOSDBModel.FK_OrderLog_Contact">
-            <End Role="Contact" EntitySet="Contacts" />
-            <End Role="OrderLog" EntitySet="OrderLogs" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="OrderLog">
-          <Key>
-            <PropertyRef Name="pkid" />
-          </Key>
-          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrderID" Type="Int32" />
-          <Property Name="SupplierID" Type="Int32" />
-          <Property Name="OrderDate" Type="DateTime" Precision="3" />
-          <Property Name="ExpectedDate" Type="DateTime" Precision="3" />
-          <Property Name="OrderlineID" Type="Int32" />
-          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ProductID" Type="Int32" />
-          <Property Name="ProductCategoryID" Type="Int32" />
-          <Property Name="Qty" Type="Double" />
-          <Property Name="LineNum" Type="Int32" />
-          <Property Name="UnitPrice" Type="Double" />
-          <Property Name="ReceivedDate" Type="DateTime" Precision="3" />
-          <Property Name="ChangeType" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="ChangeTime" Type="DateTime" Precision="3" />
-          <Property Name="UserID" Type="Int32" />
-          <NavigationProperty Name="Contact" Relationship="FOOBOSDBModel.FK_OrderLog_Contact" FromRole="OrderLog" ToRole="Contact" />
-        </EntityType>
-        <Association Name="FK_OrderLog_Contact">
-          <End Type="FOOBOSDBModel.Contact" Role="Contact" Multiplicity="0..1" />
-          <End Type="FOOBOSDBModel.OrderLog" Role="OrderLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Contact">
-              <PropertyRef Name="pkid" />
-            </Principal>
-            <Dependent Role="OrderLog">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1403,12 +1440,13 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="FOOBOSDBModel.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
-                <ScalarProperty Name="ExpectedDate" ColumnName="ExpectedDate" />
                 <ScalarProperty Name="pkid" ColumnName="pkid" />
+                <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
                 <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
                 <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="OrderedBy" ColumnName="OrderedBy" />
+                <ScalarProperty Name="ExpectedDate" ColumnName="ExpectedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1425,6 +1463,28 @@
                 <ScalarProperty Name="LineNum" ColumnName="LineNum" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderLogs">
+            <EntityTypeMapping TypeName="FOOBOSDBModel.OrderLog">
+              <MappingFragment StoreEntitySet="OrderLog">
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="ExpectedDate" ColumnName="ExpectedDate" />
+                <ScalarProperty Name="OrderlineID" ColumnName="OrderlineID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="LineNum" ColumnName="LineNum" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+                <ScalarProperty Name="ChangeType" ColumnName="ChangeType" />
+                <ScalarProperty Name="ChangeTime" ColumnName="ChangeTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1446,8 +1506,6 @@
           <EntitySetMapping Name="ProductCategories">
             <EntityTypeMapping TypeName="FOOBOSDBModel.ProductCategory">
               <MappingFragment StoreEntitySet="ProductCategory">
-                <ScalarProperty Name="InheritPerishable" ColumnName="InheritPerishable" />
-                <ScalarProperty Name="Perishable" ColumnName="Perishable" />
                 <ScalarProperty Name="pkid" ColumnName="pkid" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1461,6 +1519,8 @@
                 <ScalarProperty Name="InheritAvgValue" ColumnName="InheritAvgValue" />
                 <ScalarProperty Name="WarningQty" ColumnName="WarningQty" />
                 <ScalarProperty Name="InheritWarningQty" ColumnName="InheritWarningQty" />
+                <ScalarProperty Name="Perishable" ColumnName="Perishable" />
+                <ScalarProperty Name="InheritPerishable" ColumnName="InheritPerishable" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1569,12 +1629,12 @@
           <EntitySetMapping Name="UOMs">
             <EntityTypeMapping TypeName="FOOBOSDBModel.UOM">
               <MappingFragment StoreEntitySet="UOM">
-                <ScalarProperty Name="Abbrev" ColumnName="Abbrev" />
                 <ScalarProperty Name="pkid" ColumnName="pkid" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="BaseID" ColumnName="BaseID" />
                 <ScalarProperty Name="ConversionFactor" ColumnName="ConversionFactor" />
+                <ScalarProperty Name="Abbrev" ColumnName="Abbrev" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1585,28 +1645,6 @@
                 <ScalarProperty Name="ContactID" ColumnName="ContactID" />
                 <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
                 <ScalarProperty Name="LogoutTime" ColumnName="LogoutTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrderLogs">
-            <EntityTypeMapping TypeName="FOOBOSDBModel.OrderLog">
-              <MappingFragment StoreEntitySet="OrderLog">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="ChangeTime" ColumnName="ChangeTime" />
-                <ScalarProperty Name="ChangeType" ColumnName="ChangeType" />
-                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="LineNum" ColumnName="LineNum" />
-                <ScalarProperty Name="Qty" ColumnName="Qty" />
-                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="OrderlineID" ColumnName="OrderlineID" />
-                <ScalarProperty Name="ExpectedDate" ColumnName="ExpectedDate" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="pkid" ColumnName="pkid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

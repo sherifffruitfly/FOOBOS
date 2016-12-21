@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FOOBOS
+namespace FOOBOSEntities
 {
     using System;
     using System.Data.Entity;
@@ -31,6 +31,7 @@ namespace FOOBOS
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderLine> OrderLines { get; set; }
+        public virtual DbSet<OrderLog> OrderLogs { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<ProductLocation> ProductLocations { get; set; }
@@ -42,6 +43,5 @@ namespace FOOBOS
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<UOM> UOMs { get; set; }
         public virtual DbSet<UserLog> UserLogs { get; set; }
-        public virtual DbSet<OrderLog> OrderLogs { get; set; }
     }
 }

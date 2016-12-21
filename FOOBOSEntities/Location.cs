@@ -7,34 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FOOBOS
+namespace FOOBOSEntities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class UOM
+    public partial class Location
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UOM()
+        public Location()
         {
-            this.Products = new HashSet<Product>();
-            this.ProductCategories = new HashSet<ProductCategory>();
-            this.UOM1 = new HashSet<UOM>();
+            this.Location1 = new HashSet<Location>();
+            this.ProductLocations = new HashSet<ProductLocation>();
         }
     
         public int pkid { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public Nullable<int> BaseID { get; set; }
-        public Nullable<double> ConversionFactor { get; set; }
-        public string Abbrev { get; set; }
+        public Nullable<int> ParentLocationID { get; set; }
+        public Nullable<System.DateTime> ValidFrom { get; set; }
+        public Nullable<System.DateTime> ValidTo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Location> Location1 { get; set; }
+        public virtual Location Location2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductCategory> ProductCategories { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UOM> UOM1 { get; set; }
-        public virtual UOM UOM2 { get; set; }
+        public virtual ICollection<ProductLocation> ProductLocations { get; set; }
     }
 }

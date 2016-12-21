@@ -7,35 +7,34 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FOOBOS
+namespace FOOBOSEntities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class Supplier
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public Supplier()
         {
-            this.OrderLines = new HashSet<OrderLine>();
-            this.ProductLocations = new HashSet<ProductLocation>();
+            this.Orders = new HashSet<Order>();
         }
     
         public int pkid { get; set; }
-        public string Name { get; set; }
+        public string Supplier1 { get; set; }
         public string Description { get; set; }
-        public Nullable<int> ProductCategoryID { get; set; }
-        public Nullable<int> UOMID { get; set; }
-        public Nullable<double> AvgValue { get; set; }
-        public Nullable<double> WarningQty { get; set; }
+        public Nullable<int> ContactID { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zip { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
         public Nullable<System.DateTime> ValidFrom { get; set; }
         public Nullable<System.DateTime> ValidTo { get; set; }
     
+        public virtual Contact Contact { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderLine> OrderLines { get; set; }
-        public virtual ProductCategory ProductCategory { get; set; }
-        public virtual UOM UOM { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductLocation> ProductLocations { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

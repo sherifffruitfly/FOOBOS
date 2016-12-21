@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FOOBOSObjects;
+using FOOBOSEntities;
 
 namespace FOOBOS
 {
@@ -33,6 +35,8 @@ namespace FOOBOS
 
         private void LoadTree()
         {
+            tvOrders.BeginUpdate();
+
             // make sure we're starting fresh
             tvOrders.Nodes.Clear();
 
@@ -70,7 +74,7 @@ namespace FOOBOS
                         ordlnnodearray[i] = linenode;
                     }
 
-                    //create order node & add orderline nodes
+                    // create order node & add orderline nodes
                     string ordertext = ord.OrderNum + " - " + ord.Supplier.Supplier1 + " - " + (ord.OrderDate != null ? ord.OrderDate.Value.ToString("MM/dd/yyyy") : string.Empty);
                     TreeNode ordnode = new TreeNode(ordertext, ordlnnodearray);
                     ordnode.Tag = ord.pkid;
@@ -79,7 +83,7 @@ namespace FOOBOS
                 }
             }
 
-                this.DB = new FOOBOSDBEntities();
+            tvOrders.EndUpdate();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -213,12 +217,149 @@ namespace FOOBOS
 
         private void LoadOrderTab()
         {
+            if (this.currNode != null) // we're somewhere on the tree
+            {
+                if (this.currNode.Parent != null) // we're not on root node
+                {
+                    if (this.currNode.Parent.Text == "Orders") // this means we have an order node
+                    {
+                        //MessageBox.Show("Order! " + this.currNode.Text);
+                        //set active tab to order
+                        //populate text boxes
+                        // means i need to parse the node.text
+                        // prolly need a GETORDERFROMNODETEXT function to get to EF level
+                        // ok if i'm here i have the orderid in node.tag which is all i need for EF data access
+                        tabControl1.SelectedTab = tabControl1.TabPages[0];
+                        int orderpkid = 0;
+                        if (this.currNode.Tag != null)
+                        {
+                            orderpkid = (int)this.currNode.Tag;
+                            LoadOrderTab(orderpkid);
+                        }
+                    }
+                }
+            }
+        }
 
+        private void ClearOrderTab()
+        {
+            txtExpectedDate.Text = String.Empty;
+            txtOrderDate.Text = String.Empty;
+            txtOrderedBy.Text = String.Empty;
+            txtOrderNo.Text = String.Empty;
+            //comboSupplier.Items.Clear();
+        }
+
+        private void LoadOrderSuppliers(Order ord)
+        {
+            comboSupplier.Items.Clear();
+            Supplier currentSupplier = null;
+            this.DB = new FOOBOSDBEntities();
+            var allsuppliers = (from sup in DB.Suppliers
+                                select sup).OrderBy(c => c.Supplier1).ToList();
+
+            var currsup = (from sup in DB.Suppliers
+                           where sup.pkid == ord.SupplierID
+                           select sup).ToList();
+
+            if (currsup != null)
+            {
+                if (currsup.Count > 0)
+                {
+                    currentSupplier = currsup[0];
+
+                    // fill supplier box
+                    foreach (Supplier sup in allsuppliers)
+                    {
+                        comboSupplier.Items.Add(sup.Supplier1);
+                    }
+
+                    //select correct supplier
+                    comboSupplier.SelectedIndex = comboSupplier.FindString(currentSupplier.Supplier1);
+                }
+            }
+
+        }
+        private void LoadOrderTab(int pkid)
+        {
+            ClearOrderTab();
+            this.DB = new FOOBOSDBEntities();
+            var myorder = (from ord in this.DB.Orders
+                           where ord.pkid == pkid
+                           select ord).ToList();
+
+            if (myorder != null)
+            {
+                if (myorder.Count() > 0)
+                {
+                    Order ord = myorder[0];
+                    // populate textboxes with first order (should only be one)
+                    txtExpectedDate.Text = ord.ExpectedDate.ToString() ?? "NA";
+                    txtOrderDate.Text = ord.OrderDate.ToString() ?? "NA";
+                    txtOrderedBy.Text = "don't have this field in the db!";
+                    txtOrderNo.Text = ord.OrderNum.ToString() ?? "NA";
+
+                    LoadOrderSuppliers(ord);
+                }
+            }
         }
 
         private void LoadOrderlineTab()
         {
+            this.dgvOrderlines.DataSource = null;
+            this.dgvOrderlines.Rows.Clear();
 
+            if (this.currNode != null) // we're somewhere on the tree
+            {
+                if (this.currNode.Parent != null) // we're not on root node
+                {
+                    if (this.currNode.Parent.Parent != null) // this means we have an orderline node (there's only 3 levels)
+                    {
+                        //MessageBox.Show("Orderline! " + this.currNode.Text);
+                        // set active tab to orderlines
+                        // select correct orderline row or whatever 
+                        // also load the order (might need a loadorder overload to pass a particular node rather than this.currnode)
+                        // need to parse node text as in order
+                        // did i populate the node.tag?
+                        // ok if i'm here i have the orderlineid in the node.tag which means i also have the order
+                        tabControl1.SelectedTab = tabControl1.TabPages[1];
+
+                        this.DB = new FOOBOSDBEntities();
+                        int orderid = 0;
+                        int orderlineid = (int)this.currNode.Tag;
+
+                        var myorderlines = (from ordln in DB.OrderLines
+                                           where ordln.pkid == orderlineid
+                                           select ordln).ToList();
+
+                        if (myorderlines.Count > 0)
+                        {
+                            orderid = myorderlines[0].OrderID ?? 0;
+                        }
+
+                        if (orderid > 0)
+                        {
+                            LoadOrderTab(orderid);
+
+                            dgvOrderlines.DataSource = GetOrderlines(orderid);
+                        }
+                        
+                    }
+                }
+            }
+        }
+
+        List<OrderLine> GetOrderlines(int orderid)
+        {
+            List<OrderLine> ret = null;
+
+            var myorderlines2 = (from ordln in DB.OrderLines
+                                 where ordln.OrderID == orderid
+                                 select ordln).ToList();
+
+            ret = myorderlines2;
+
+            return ret;
         }
 
     }

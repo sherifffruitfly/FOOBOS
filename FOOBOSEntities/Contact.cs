@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FOOBOS
+namespace FOOBOSEntities
 {
     using System;
     using System.Collections.Generic;
@@ -17,11 +17,12 @@ namespace FOOBOS
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Contact()
         {
+            this.Orders = new HashSet<Order>();
+            this.OrderLogs = new HashSet<OrderLog>();
             this.ProductLocationLogs = new HashSet<ProductLocationLog>();
             this.SaleLogs = new HashSet<SaleLog>();
             this.Suppliers = new HashSet<Supplier>();
             this.UserLogs = new HashSet<UserLog>();
-            this.OrderLogs = new HashSet<OrderLog>();
         }
     
         public int pkid { get; set; }
@@ -41,6 +42,10 @@ namespace FOOBOS
         public Nullable<int> Admin { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderLog> OrderLogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductLocationLog> ProductLocationLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SaleLog> SaleLogs { get; set; }
@@ -48,7 +53,5 @@ namespace FOOBOS
         public virtual ICollection<Supplier> Suppliers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserLog> UserLogs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderLog> OrderLogs { get; set; }
     }
 }

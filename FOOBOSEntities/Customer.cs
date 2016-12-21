@@ -7,26 +7,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FOOBOS
+namespace FOOBOSEntities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Sale
+    public partial class Customer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Sale()
+        public Customer()
         {
-            this.SaleLines = new HashSet<SaleLine>();
+            this.Sales = new HashSet<Sale>();
         }
     
         public int pkid { get; set; }
-        public Nullable<int> CustomerID { get; set; }
-        public Nullable<System.DateTime> SaleDate { get; set; }
-        public string Description { get; set; }
+        public Nullable<int> ClientID { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string County { get; set; }
+        public string Neighborhood { get; set; }
+        public string Aux1 { get; set; }
+        public string Aux2 { get; set; }
     
-        public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SaleLine> SaleLines { get; set; }
+        public virtual ICollection<Sale> Sales { get; set; }
     }
 }
