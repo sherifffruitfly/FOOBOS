@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="FOOBOSDataSource">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=gauss\sqlexpress;Initial Catalog=FOOBOSDB</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>397b1e60-11a6-4b69-bda2-01dae41405d4</DataSourceID>
+</RptDataSource>

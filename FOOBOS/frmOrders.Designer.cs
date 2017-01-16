@@ -34,6 +34,7 @@
             this.tvOrders = new System.Windows.Forms.TreeView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabOrders = new System.Windows.Forms.TabPage();
+            this.dgvOrderlines = new System.Windows.Forms.DataGridView();
             this.txtUnused = new System.Windows.Forms.TextBox();
             this.txtOrderedBy = new System.Windows.Forms.TextBox();
             this.txtExpectedDate = new System.Windows.Forms.TextBox();
@@ -57,7 +58,6 @@
             this.deleteOrderlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tvContextRoot = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dgvOrderlines = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -65,11 +65,10 @@
             this.splitContainer1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabOrders.SuspendLayout();
-            this.tabOrderlines.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderlines)).BeginInit();
             this.tvContextOrder.SuspendLayout();
             this.tvContextOrderline.SuspendLayout();
             this.tvContextRoot.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderlines)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -83,7 +82,9 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -121,6 +122,7 @@
             // 
             // tabOrders
             // 
+            this.tabOrders.Controls.Add(this.dgvOrderlines);
             this.tabOrders.Controls.Add(this.txtUnused);
             this.tabOrders.Controls.Add(this.txtOrderedBy);
             this.tabOrders.Controls.Add(this.txtExpectedDate);
@@ -140,6 +142,15 @@
             this.tabOrders.TabIndex = 0;
             this.tabOrders.Text = "Order";
             this.tabOrders.UseVisualStyleBackColor = true;
+            // 
+            // dgvOrderlines
+            // 
+            this.dgvOrderlines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOrderlines.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvOrderlines.Location = new System.Drawing.Point(3, 185);
+            this.dgvOrderlines.Name = "dgvOrderlines";
+            this.dgvOrderlines.Size = new System.Drawing.Size(639, 174);
+            this.dgvOrderlines.TabIndex = 12;
             // 
             // txtUnused
             // 
@@ -240,7 +251,6 @@
             // 
             // tabOrderlines
             // 
-            this.tabOrderlines.Controls.Add(this.dgvOrderlines);
             this.tabOrderlines.Location = new System.Drawing.Point(4, 22);
             this.tabOrderlines.Name = "tabOrderlines";
             this.tabOrderlines.Padding = new System.Windows.Forms.Padding(3);
@@ -324,15 +334,6 @@
             this.addOrderToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.addOrderToolStripMenuItem.Text = "Add Order";
             // 
-            // dgvOrderlines
-            // 
-            this.dgvOrderlines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvOrderlines.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvOrderlines.Location = new System.Drawing.Point(3, 3);
-            this.dgvOrderlines.Name = "dgvOrderlines";
-            this.dgvOrderlines.Size = new System.Drawing.Size(639, 356);
-            this.dgvOrderlines.TabIndex = 0;
-            // 
             // frmOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -352,11 +353,10 @@
             this.tabControl1.ResumeLayout(false);
             this.tabOrders.ResumeLayout(false);
             this.tabOrders.PerformLayout();
-            this.tabOrderlines.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderlines)).EndInit();
             this.tvContextOrder.ResumeLayout(false);
             this.tvContextOrderline.ResumeLayout(false);
             this.tvContextRoot.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderlines)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -1,4 +1,4 @@
-﻿--enable order creation with some initial data
+﻿--enable order creation with some initial lookup data
 insert into ProductCategory (Name, Perishable) values ('Fruits & Vegetables', 1)
 insert into ProductCategory (Name, Perishable) values ('Dairy', 1)
 insert into ProductCategory (Name, Perishable) values ('Protein', 1)
@@ -28,3 +28,16 @@ insert into Location (Name) values ('Small freezer')
 insert into Location (Name) values ('Front shelf')
 insert into Location (Name) values ('Back shelf')
 
+
+-- some test orders/lines
+insert into [Order] (OrderNum, SupplierID, OrderDate, Description) values ('CS00003', 7, getdate(), 'test order 3')
+insert into [Order] (OrderNum, SupplierID, OrderDate, Description) values ('CS00004', 8, getdate(), 'test order 4')
+insert into [Order] (OrderNum, SupplierID, OrderDate, Description) values ('CS00005', 9, getdate(), 'test order 5')
+insert into OrderLine (OrderID, ProductCategoryID, Qty, LineNum) values (3, 6, 13.34, 1)
+insert into OrderLine (OrderID, ProductCategoryID, Qty, LineNum) values (3, 5, 12, 1)
+insert into OrderLine (OrderID, ProductCategoryID, Qty, LineNum) values (3, 9, 135, 1)
+insert into OrderLine (OrderID, ProductCategoryID, Qty, LineNum) values (4, 1, 18.5, 1)
+insert into OrderLine (OrderID, ProductCategoryID, Qty, LineNum) values (4, 2, 38.9, 1)
+insert into OrderLine (OrderID, ProductCategoryID, Qty, LineNum) values (5, 8, 5.4, 1)
+insert into OrderLine (OrderID, ProductCategoryID, Qty, LineNum) values (5, 10, 9, 1)
+insert into OrderLine (OrderID, ProductCategoryID, Qty, LineNum) values (5, 4, 22, 1)

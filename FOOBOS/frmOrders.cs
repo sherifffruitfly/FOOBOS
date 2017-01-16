@@ -229,12 +229,13 @@ namespace FOOBOS
                         // means i need to parse the node.text
                         // prolly need a GETORDERFROMNODETEXT function to get to EF level
                         // ok if i'm here i have the orderid in node.tag which is all i need for EF data access
-                        tabControl1.SelectedTab = tabControl1.TabPages[0];
+                        //tabControl1.SelectedTab = tabControl1.TabPages[0];
                         int orderpkid = 0;
                         if (this.currNode.Tag != null)
                         {
                             orderpkid = (int)this.currNode.Tag;
                             LoadOrderTab(orderpkid);
+                            LoadOrderlines(orderpkid);
                         }
                     }
                 }
@@ -304,6 +305,17 @@ namespace FOOBOS
             }
         }
 
+        private void LoadOrderlines(int ordid)
+        {
+            this.DB = new FOOBOSDBEntities();
+
+            var myorderlines = (from ordln in DB.OrderLines
+                                where ordln.OrderID == ordid
+                                select ordln).ToList();
+
+            dgvOrderlines.DataSource = GetOrderlines(ordid);
+        }
+
         private void LoadOrderlineTab()
         {
             this.dgvOrderlines.DataSource = null;
@@ -322,7 +334,7 @@ namespace FOOBOS
                         // need to parse node text as in order
                         // did i populate the node.tag?
                         // ok if i'm here i have the orderlineid in the node.tag which means i also have the order
-                        tabControl1.SelectedTab = tabControl1.TabPages[1];
+                        //tabControl1.SelectedTab = tabControl1.TabPages[1];
 
                         this.DB = new FOOBOSDBEntities();
                         int orderid = 0;

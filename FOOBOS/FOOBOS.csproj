@@ -60,11 +60,6 @@
     <Compile Include="FOOBOSBaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FOOBOSDBDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FOOBOSDBDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,17 +98,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="FOOBOSDBDataSet.xsc">
-      <DependentUpon>FOOBOSDBDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="FOOBOSDBDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>FOOBOSDBDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="FOOBOSDBDataSet.xss">
-      <DependentUpon>FOOBOSDBDataSet.xsd</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -129,6 +113,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FOOBOSDatabaseGenerator.sql" />
     <Content Include="FOOBOSInitialDataPopulation.txt" />
     <Content Include="FOOBOSMainIcon.ico" />
   </ItemGroup>
